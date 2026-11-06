@@ -1,10 +1,11 @@
 # AI-Assisted.
 # Source-PR CI for the CSR previews site. This repo holds ONLY source; there is
 # no committed _site to verify, so this builds the HTML from source (--skip-pdf,
-# no texlive needed) inside the pinned toolchain image and runs the consistency +
-# browser gates against the freshly built tree. The authoritative gates run in
-# bin/csr-build (local) and the artifacts repo's pages.yml (deploy); this is the
-# fast pre-merge smoke test.
+# no texlive step needed beyond the image) inside the pinned toolchain image
+# (built from docker/Dockerfile) and runs the consistency + browser gates against
+# the freshly built tree. The authoritative gates run in bin/csr-build (local) and
+# the artifacts repo's pages.yml (deploy); this is the fast pre-merge smoke test.
+# Dormant unless CI_ENABLED_ORG_AI_ASSISTED is set (CI is off by default here).
 
 name: checks
 
@@ -21,6 +22,9 @@ permissions:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+env:
+  CSR_IMAGE: csr-build-toolchain:latest
 
 jobs:
   check:
@@ -44,39 +48,28 @@ jobs:
           path: dist-ai
           persist-credentials: false
 
-      - name: Pull the pinned toolchain image
-        run: |
-          set -o errexit -o nounset -o pipefail
-          image="$(grep -vE '^[[:space:]]*(#|$)' source/docker/image.ref | head -n 1)"
-          printf 'image=%s\n' "${image}" >> "${GITHUB_ENV}"
-          docker pull "${image}"
-
       - name: Build HTML from source (no PDF) in the image
-        run: |
-          set -o errexit -o nounset -o pipefail
-          mkdir --parents build-out
-          bash source/docker/docker-build-site.sh \
-            "${image}" \
-            "${GITHUB_WORKSPACE}/journal-maker" \
-            "${GITHUB_WORKSPACE}/source" \
-            "${GITHUB_WORKSPACE}/build-out" \
-            --skip-pdf
+        run: >
+          mkdir --parents build-out &&
+          bash source/docker/docker-build-site.sh
+          "${GITHUB_WORKSPACE}/journal-maker"
+          "${GITHUB_WORKSPACE}/source"
+          "${GITHUB_WORKSPACE}/build-out"
+          --skip-pdf
 
       - name: Static consistency (check_site, in image)
-        run: |
-          set -o errexit -o nounset -o pipefail
-          docker run --rm --user "$(id -u):$(id -g)" --env HOME=/tmp --env LC_ALL=C \
-            --volume "${GITHUB_WORKSPACE}/dist-ai:/da:ro" \
-            --volume "${GITHUB_WORKSPACE}/build-out:/work:ro" \
-            "${image}" /da/usr/share/website-tests/check_site.py /work/_site
+        run: >
+          docker run --rm --user "$(id -u):$(id -g)" --env HOME=/tmp --env LC_ALL=C
+          --volume "${GITHUB_WORKSPACE}/dist-ai:/da:ro"
+          --volume "${GITHUB_WORKSPACE}/build-out:/work:ro"
+          "${CSR_IMAGE}" /da/usr/share/website-tests/check_site.py /work/_site
 
       - name: SVG active-content safety (in image)
-        run: |
-          set -o errexit -o nounset -o pipefail
-          docker run --rm --user "$(id -u):$(id -g)" --env HOME=/tmp --env LC_ALL=C \
-            --volume "${GITHUB_WORKSPACE}/dist-ai:/da:ro" \
-            --volume "${GITHUB_WORKSPACE}/build-out:/work:ro" \
-            "${image}" /da/usr/share/website-tests/check_svg_safety.py /work/_site
+        run: >
+          docker run --rm --user "$(id -u):$(id -g)" --env HOME=/tmp --env LC_ALL=C
+          --volume "${GITHUB_WORKSPACE}/dist-ai:/da:ro"
+          --volume "${GITHUB_WORKSPACE}/build-out:/work:ro"
+          "${CSR_IMAGE}" /da/usr/share/website-tests/check_svg_safety.py /work/_site
 
       - name: Mobile-overflow guard
         run: ./dist-ai/ci/website-mobile-check.sh "${GITHUB_WORKSPACE}/build-out/_site"

@@ -25,7 +25,6 @@
 ##   CSR_DIST_AI           dist-ai checkout (default: sibling of this repo)
 ##   CSR_ARTIFACTS         artifacts repo checkout (default: sibling
 ##                         computer-security-research.github.io)
-##   CSR_IMAGE             toolchain image ref (default: docker/image.ref)
 ##   CSR_ARTIFACTS_REMOTES space-separated git remotes to push the artifacts repo
 ##                         to (default: "computer-security-research org-ai-assisted")
 
@@ -61,22 +60,6 @@ read -r -a artifacts_remotes <<< "${CSR_ARTIFACTS_REMOTES:-computer-security-res
 dirty_render_inputs() {
    git -C "${content_dir}" status --porcelain --untracked-files=all -- \
       articles pages site.toml .github/web-tests.yml
-}
-
-## Resolve the toolchain image ref: CSR_IMAGE, else the first non-comment,
-## non-blank line of docker/image.ref.
-resolve_image() {
-   if [ -n "${CSR_IMAGE:-}" ]; then
-      printf '%s\n' "${CSR_IMAGE}"
-      return 0
-   fi
-   local ref
-   ref="$(grep -vE '^[[:space:]]*(#|$)' "${content_dir}/docker/image.ref" | head -n 1)"
-   if [ -z "${ref}" ]; then
-      printf '%s\n' "csr-build: no image ref in ${content_dir}/docker/image.ref" >&2
-      exit 1
-   fi
-   printf '%s\n' "${ref}"
 }
 
 do_commit=1
@@ -127,19 +110,6 @@ if [ ! -x "${check_svg_safety}" ]; then
    exit 1
 fi
 
-image="$(resolve_image)"
-
-## Preflight: the toolchain lives in the pinned image, not the sandbox /usr (so a
-## sandbox /usr reset cannot break the build). Ensure the image is present;
-## pull it (public GHCR, no auth) if not. Nothing to recall -- the safe path is
-## the default.
-printf '%s\n' "csr-build: ensuring toolchain image ${image} in sandbox ${target} ..."
-## $1 is expanded by the sandbox-side sh from the positional arg, not the host --
-## single quotes are deliberate (keep the host from expanding it).
-# shellcheck disable=SC2016
-sandbox --target "${target}" --pid-scope host exec -- \
-   sh -c 'docker image inspect "$1" >/dev/null 2>&1 || docker pull "$1"' sh "${image}"
-
 ## Build into a staging dir OUTSIDE the content tree: the sandbox refuses to
 ## --pull a path nested inside a --sync'd tree, and the staging tree is the only
 ## thing pulled back (host sources are never written).
@@ -147,14 +117,15 @@ staging="${HOME}/.cache/csr-build-site"
 safe-rm --recursive --force -- "${staging}"
 mkdir --parents -- "${staging}"
 
-printf '%s\n' "csr-build: building _site in ${image} (sandbox ${target}) ..."
+printf '%s\n' "csr-build: building _site in the pinned toolchain image (sandbox ${target}) ..."
 
-## The build runs journal-maker INSIDE the pinned image via docker-build-site.sh.
-## docker IS reachable to the sandbox user (docker group) under --pid-scope host,
-## so no sudo (which is dead under 'sandbox run'). --workdir syncs the content
-## tree in and cd's there, so the content path is ${PWD} in the sandbox (no
-## dependence on the checkout's basename). journal-maker + the staging out dir
-## come from the stable-named ${SANDBOX_SYNC_JOURNAL_MAKER} /
+## The build runs journal-maker INSIDE the pinned image via docker-build-site.sh,
+## which BUILDS the image from docker/Dockerfile if absent (registry-free; the
+## sandbox caches it in /var/lib/docker). docker IS reachable to the sandbox user
+## (docker group) under --pid-scope host, so no sudo (dead under 'sandbox run').
+## --workdir syncs the content tree in and cd's there, so the content path is
+## ${PWD} in the sandbox (no dependence on the checkout's basename); journal-maker
+## + the staging out dir come from the stable-named ${SANDBOX_SYNC_JOURNAL_MAKER} /
 ## ${SANDBOX_SYNC_CSR_BUILD_SITE}. The single exec keeps this off the inline-shell
 ## guard. The site lands in ${staging}/_site (docker-build-site mounts staging at
 ## /work and builds /work/_site).
@@ -163,8 +134,7 @@ sandbox --target "${target}" --pid-scope host run \
    --sync "${journal_maker}" \
    --pull "${staging}" \
    --workdir "${content_dir}" \
-   -- bash -c 'exec bash "${PWD}/docker/docker-build-site.sh" "$1" "${SANDBOX_SYNC_JOURNAL_MAKER}" "${PWD}" "${SANDBOX_SYNC_CSR_BUILD_SITE}"' \
-      bash "${image}"
+   -- bash -c 'exec bash "${PWD}/docker/docker-build-site.sh" "${SANDBOX_SYNC_JOURNAL_MAKER}" "${PWD}" "${SANDBOX_SYNC_CSR_BUILD_SITE}"'
 
 if [ ! -f "${staging}/_site/index.html" ]; then
    printf '%s\n' "csr-build: index.html missing in staging after build (pull failed?)" >&2

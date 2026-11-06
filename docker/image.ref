@@ -1,9 +1,0 @@
-# Pinned CSR toolchain image -- the SINGLE source of truth for which image both
-# bin/csr-build (local) and .github/workflows/pages.yml (deploy) run, so their
-# PDF/docx bytes match bit-for-bit. build-image.yml pushes the image and prints
-# the @sha256 digest to paste here (its own commit), which re-mints the committed
-# .sha512 on the next csr-build. The first non-comment, non-blank line is the ref.
-#
-# Bootstrap value (:latest tag) until the first GHCR push; migration replaces it
-# with the digest form ghcr.io/org-ai-assisted/csr-build-toolchain@sha256:<digest>.
-ghcr.io/org-ai-assisted/csr-build-toolchain:latest

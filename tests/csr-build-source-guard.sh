@@ -78,7 +78,6 @@ run_build() {
       CSR_JOURNAL_MAKER=/nonexistent \
       CSR_DIST_AI=/nonexistent \
       CSR_ARTIFACTS=/nonexistent \
-      CSR_IMAGE=x \
       "${fixture}/bin/csr-build" "$@" 2>&1
    )" || build_rc=$?
 }
@@ -285,7 +284,6 @@ run_build_full() {
       CSR_JOURNAL_MAKER="${stub_jm}" \
       CSR_DIST_AI="${stub_dist}" \
       CSR_ARTIFACTS="${stub_artifacts}" \
-      CSR_IMAGE=x \
       "${fixture}/bin/csr-build" 2>&1
    )" || build_rc=$?
 }

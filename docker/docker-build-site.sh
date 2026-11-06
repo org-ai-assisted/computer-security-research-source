@@ -5,18 +5,24 @@
 
 ## AI-Assisted
 
-## Run journal-maker build inside the pinned toolchain image. Used by BOTH
-## bin/csr-build (local, in the sandbox) and .github/workflows/pages.yml (deploy,
-## on the runner) so the PDF/docx bytes are produced by the SAME toolchain and
-## match the committed .sha512 bit-for-bit.
+## Build journal-maker's site output inside the pinned toolchain image. Used by
+## BOTH bin/csr-build (local, in the sandbox) and .github/workflows/pages.yml
+## (deploy, on the runner), so the PDF/docx bytes are produced by the SAME
+## toolchain and match the committed .sha512 bit-for-bit.
+##
+## Registry-free (no GHCR): the image is BUILT from docker/Dockerfile here and
+## cached per host (sandbox /var/lib/docker; the CI runner per run). The toolchain
+## is frozen by the base @sha256 digest in the Dockerfile; within a publish window
+## both hosts build the same bytes, and a drift (e.g. a stale re-deploy after the
+## archive moved) is caught loudly by --verify-sha at deploy, never shipped.
 ##
 ## Usage:
-##   docker-build-site.sh <image> <journal-maker-dir> <content-dir> <out-dir> [journal-maker build args...]
+##   docker-build-site.sh <journal-maker-dir> <content-dir> <out-dir> [journal-maker build args...]
 ##
-## The site is built into <out-dir>/_site (a SUBDIR of the mounted dir, never the
-## mount POINT -- journal-maker rmtree's --out, and a bind-mount point cannot be
-## removed from inside the container). Extra args are passed through, e.g.
-## '--pdf-only --verify-sha' for the deploy.
+## Builds into <out-dir>/_site (a SUBDIR of the mounted dir, never the mount
+## POINT -- journal-maker rmtree's --out, and a bind-mount point cannot be removed
+## from inside the container). Extra args pass through, e.g. '--pdf-only
+## --verify-sha' for the deploy.
 
 set -o errexit
 set -o nounset
@@ -26,16 +32,25 @@ shopt -s inherit_errexit
 shopt -s shift_verbose
 export LC_ALL=C
 
-if [ "$#" -lt 4 ]; then
-   printf '%s\n' "usage: $0 <image> <journal-maker-dir> <content-dir> <out-dir> [build args...]" >&2
+if [ "$#" -lt 3 ]; then
+   printf '%s\n' "usage: $0 <journal-maker-dir> <content-dir> <out-dir> [build args...]" >&2
    exit 64
 fi
 
-image="$1"
-journal_maker="$2"
-content="$3"
-out="$4"
-shift 4
+journal_maker="$1"
+content="$2"
+out="$3"
+shift 3
+
+image='csr-build-toolchain:latest'
+docker_dir="$(dirname -- "$(readlink --canonicalize -- "$0")")"
+
+## Build-if-missing: the image is fully defined by docker/Dockerfile. Cached per
+## host after the first build.
+if ! docker image inspect "${image}" >/dev/null 2>&1; then
+   printf '%s\n' "docker-build-site: building ${image} from ${docker_dir}/Dockerfile ..."
+   docker build --tag "${image}" --file "${docker_dir}/Dockerfile" "${docker_dir}"
+fi
 
 ## --network none: the build is offline (pandoc + pdflatex + local CSL); it also
 ## guarantees no network input can perturb the reproducible output.
