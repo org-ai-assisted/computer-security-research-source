@@ -8,14 +8,15 @@
 ## sandbox) and in the Pages deploy (pages.yml) so the PDF/docx bytes match
 ## bit-for-bit and the committed .sha512 describes the SERVED file.
 ##
-## Reproducibility model: the toolchain is frozen by the built IMAGE, pinned by
-## @sha256 digest in docker/image.ref -- BOTH sides pull that one digest, so they
-## run byte-identical binaries. The image is built ONCE from the current Debian
-## trixie archive (deb.debian.org -- reliable, unlike snapshot.debian.org which
-## 503s under load), pushed to the public GHCR package, and rebuilt only on a
-## deliberate toolchain bump (which re-mints the committed .sha512). Freezing via
-## the shared image digest -- not apt snapshot pinning -- keeps every build
-## reliable while staying reproducible across the two hosts.
+## Reproducibility model (registry-free): both sides BUILD this image from this
+## Dockerfile via docker/docker-build-site.sh (no GHCR -- the bot lacks packages
+## scope and a private image cannot be pulled anonymously). The base is pinned by
+## @sha256 digest; the toolchain installs from the current Debian trixie archive
+## (deb.debian.org -- reliable, unlike snapshot.debian.org which 503s under load).
+## Within a publish window both hosts build byte-identical bytes; the deploy's
+## --pdf-only --verify-sha ENFORCES bit-for-bit and fails loud on any drift (never
+## ships bad bytes). A deliberate toolchain bump = edit this file (docker build
+## then rebuilds) and re-run csr-build to re-mint the committed .sha512.
 ##
 ## Re-resolve the base digest:
 ##   docker pull debian:trixie-slim

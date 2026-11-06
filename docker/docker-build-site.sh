@@ -45,12 +45,12 @@ shift 3
 image='csr-build-toolchain:latest'
 docker_dir="$(dirname -- "$(readlink --canonicalize -- "$0")")"
 
-## Build-if-missing: the image is fully defined by docker/Dockerfile. Cached per
-## host after the first build.
-if ! docker image inspect "${image}" >/dev/null 2>&1; then
-   printf '%s\n' "docker-build-site: building ${image} from ${docker_dir}/Dockerfile ..."
-   docker build --tag "${image}" --file "${docker_dir}/Dockerfile" "${docker_dir}"
-fi
+## ALWAYS docker build (not build-if-missing): the layer cache makes an unchanged
+## Dockerfile a fast no-op, while a Dockerfile change (a toolchain bump) correctly
+## rebuilds -- a build-if-present check would pin a stale cached image and silently
+## defeat the bump. The image is fully defined by docker/Dockerfile.
+printf '%s\n' "docker-build-site: building ${image} from ${docker_dir}/Dockerfile ..."
+docker build --tag "${image}" --file "${docker_dir}/Dockerfile" "${docker_dir}"
 
 ## --network none: the build is offline (pandoc + pdflatex + local CSL); it also
 ## guarantees no network input can perturb the reproducible output.

@@ -10,11 +10,12 @@
 ## _site tree is published to a SEPARATE artifacts repo
 ## (computer-security-research.github.io), whose master push IS the Pages deploy.
 ##
-## The build runs inside the pinned toolchain image (docker/image.ref) in the
-## sandbox, so the PDF/docx bytes are reproducible: csr-build builds them +
-## their .sha512 locally and commits ONLY the .sha512 (text); the gitignored
-## binaries are rebuilt at deploy in the SAME image and verified against those
-## committed .sha512 (bit-for-bit gate). No binary ever enters git.
+## The build runs inside the pinned toolchain image (built from docker/Dockerfile
+## by docker/docker-build-site.sh) in the sandbox, so the PDF/docx bytes are
+## reproducible: csr-build builds them + their .sha512 locally and commits ONLY
+## the .sha512 (text); the gitignored binaries are rebuilt at deploy in the SAME
+## image and verified against those committed .sha512 (bit-for-bit gate). No
+## binary ever enters git.
 ##
 ## Usage: bin/csr-build [--no-commit]
 ##   --no-commit   build + mirror into the artifacts _site only; do not commit/push.
