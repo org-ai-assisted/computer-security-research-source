@@ -1,0 +1,233 @@
+#!/bin/bash
+
+## Copyright (C) 2026 - 2026 ENCRYPTED SUPPORT LLC <adrelanos@kicksecure.com>
+## See the file COPYING for copying conditions.
+
+## AI-Assisted
+
+## csr-build: build the Computer Security Research previews site and publish it.
+## This repo holds ONLY source (site.toml, articles/, pages/); the GENERATED
+## _site tree is published to a SEPARATE artifacts repo
+## (computer-security-research.github.io), whose master push IS the Pages deploy.
+##
+## The build runs inside the pinned toolchain image (docker/image.ref) in the
+## sandbox, so the PDF/docx bytes are reproducible: csr-build builds them +
+## their .sha512 locally and commits ONLY the .sha512 (text); the gitignored
+## binaries are rebuilt at deploy in the SAME image and verified against those
+## committed .sha512 (bit-for-bit gate). No binary ever enters git.
+##
+## Usage: bin/csr-build [--no-commit]
+##   --no-commit   build + mirror into the artifacts _site only; do not commit/push.
+##
+## Env overrides:
+##   CSR_SANDBOX_TARGET    sandbox qube (default: temp-claude)
+##   CSR_JOURNAL_MAKER     journal-maker checkout (default: sibling of this repo)
+##   CSR_DIST_AI           dist-ai checkout (default: sibling of this repo)
+##   CSR_ARTIFACTS         artifacts repo checkout (default: sibling
+##                         computer-security-research.github.io)
+##   CSR_IMAGE             toolchain image ref (default: docker/image.ref)
+##   CSR_ARTIFACTS_REMOTES space-separated git remotes to push the artifacts repo
+##                         to (default: "computer-security-research org-ai-assisted")
+
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o errtrace
+shopt -s inherit_errexit
+shopt -s shift_verbose
+export LC_ALL=C
+
+target="${CSR_SANDBOX_TARGET:-temp-claude}"
+
+script_dir="$(dirname -- "$(readlink --canonicalize -- "$0")")"
+content_dir="$(dirname -- "${script_dir}")"
+journal_maker="${CSR_JOURNAL_MAKER:-$(dirname -- "${content_dir}")/journal-maker}"
+dist_ai="${CSR_DIST_AI:-$(dirname -- "${content_dir}")/dist-ai}"
+artifacts_dir="${CSR_ARTIFACTS:-$(dirname -- "${content_dir}")/computer-security-research.github.io}"
+check_site="${dist_ai}/usr/share/website-tests/check_site.py"
+check_svg_safety="${dist_ai}/usr/share/website-tests/check_svg_safety.py"
+read -r -a artifacts_remotes <<< "${CSR_ARTIFACTS_REMOTES:-computer-security-research org-ai-assisted}"
+
+## Dirty RENDER INPUTS -- the working-tree source paths the build turns into
+## _site: articles/ (incl. per-article refs.bib/source-quotes.toml), pages/,
+## site.toml, and .github/web-tests.yml (copied into _site, selects the
+## validation policy). Tracked or untracked. Shared by the pre-build guard and
+## the post-build re-check so their scope cannot drift. A POSITIVE list, NOT
+## "everything": a dirty build script (bin/), docker/, test, or CI workflow is
+## not a render input and must not false-block a content publish on a shared
+## tree. KEEP IN SYNC with what the build reads/copies -- a NEW render input
+## MUST be added here, else an uncommitted copy of it could publish unguarded.
+## --untracked-files=all overrides a user's status.showUntrackedFiles=no.
+dirty_render_inputs() {
+   git -C "${content_dir}" status --porcelain --untracked-files=all -- \
+      articles pages site.toml .github/web-tests.yml
+}
+
+## Resolve the toolchain image ref: CSR_IMAGE, else the first non-comment,
+## non-blank line of docker/image.ref.
+resolve_image() {
+   if [ -n "${CSR_IMAGE:-}" ]; then
+      printf '%s\n' "${CSR_IMAGE}"
+      return 0
+   fi
+   local ref
+   ref="$(grep -vE '^[[:space:]]*(#|$)' "${content_dir}/docker/image.ref" | head -n 1)"
+   if [ -z "${ref}" ]; then
+      printf '%s\n' "csr-build: no image ref in ${content_dir}/docker/image.ref" >&2
+      exit 1
+   fi
+   printf '%s\n' "${ref}"
+}
+
+do_commit=1
+if [ "${1:-}" = "--no-commit" ]; then
+   do_commit=0
+elif [ "$#" -gt 0 ]; then
+   printf '%s\n' "csr-build: unknown argument: ${1}" >&2
+   exit 1
+fi
+
+if [ ! -f "${content_dir}/site.toml" ]; then
+   printf '%s\n' "csr-build: ${content_dir} is not a CSR source repo (no site.toml)" >&2
+   exit 1
+fi
+
+## Refuse to build+publish when article SOURCES are uncommitted: csr-build
+## renders from the WORKING TREE but publishes only the generated _site to the
+## artifacts repo, so an uncommitted render-input edit would ship in the deployed
+## tree yet be absent from the source repo -- committed source and the deployed
+## site drift, and on a shared tree a sibling's uncommitted edit would be
+## published too. The author commits sources themselves, with their own message;
+## this guard makes that the REQUIRED path. Preview uncommitted work with
+## --no-commit. Checked BEFORE the build so a dirty tree fails in a second.
+if [ "${do_commit}" -eq 1 ]; then
+   dirty_sources="$(dirty_render_inputs)"
+   if [ -n "${dirty_sources}" ]; then
+      printf '%s\n' "csr-build: refusing to build+publish -- uncommitted source changes:" >&2
+      printf '%s\n' "${dirty_sources}" >&2
+      printf '%s\n' "csr-build: commit the source(s) first, or re-run with --no-commit to preview." >&2
+      exit 1
+   fi
+fi
+
+if [ ! -x "${journal_maker}/usr/bin/journal-maker" ]; then
+   printf '%s\n' "csr-build: journal-maker not found at ${journal_maker} (set CSR_JOURNAL_MAKER)" >&2
+   exit 1
+fi
+if [ ! -d "${artifacts_dir}" ] || [ ! -d "${artifacts_dir}/.git" ]; then
+   printf '%s\n' "csr-build: artifacts repo not found at ${artifacts_dir} (set CSR_ARTIFACTS)" >&2
+   exit 1
+fi
+if [ ! -x "${check_site}" ]; then
+   printf '%s\n' "csr-build: dist-ai check_site not found at ${check_site} (set CSR_DIST_AI)" >&2
+   exit 1
+fi
+if [ ! -x "${check_svg_safety}" ]; then
+   printf '%s\n' "csr-build: dist-ai check_svg_safety not found at ${check_svg_safety} (set CSR_DIST_AI)" >&2
+   exit 1
+fi
+
+image="$(resolve_image)"
+
+## Preflight: the toolchain lives in the pinned image, not the sandbox /usr (so a
+## sandbox /usr reset cannot break the build). Ensure the image is present;
+## pull it (public GHCR, no auth) if not. Nothing to recall -- the safe path is
+## the default.
+printf '%s\n' "csr-build: ensuring toolchain image ${image} in sandbox ${target} ..."
+## $1 is expanded by the sandbox-side sh from the positional arg, not the host --
+## single quotes are deliberate (keep the host from expanding it).
+# shellcheck disable=SC2016
+sandbox --target "${target}" --pid-scope host exec -- \
+   sh -c 'docker image inspect "$1" >/dev/null 2>&1 || docker pull "$1"' sh "${image}"
+
+## Build into a staging dir OUTSIDE the content tree: the sandbox refuses to
+## --pull a path nested inside a --sync'd tree, and the staging tree is the only
+## thing pulled back (host sources are never written).
+staging="${HOME}/.cache/csr-build-site"
+safe-rm --recursive --force -- "${staging}"
+mkdir --parents -- "${staging}"
+
+printf '%s\n' "csr-build: building _site in ${image} (sandbox ${target}) ..."
+
+## The build runs journal-maker INSIDE the pinned image via docker-build-site.sh.
+## docker IS reachable to the sandbox user (docker group) under --pid-scope host,
+## so no sudo (which is dead under 'sandbox run'). --workdir syncs the content
+## tree in and cd's there, so the content path is ${PWD} in the sandbox (no
+## dependence on the checkout's basename). journal-maker + the staging out dir
+## come from the stable-named ${SANDBOX_SYNC_JOURNAL_MAKER} /
+## ${SANDBOX_SYNC_CSR_BUILD_SITE}. The single exec keeps this off the inline-shell
+## guard. The site lands in ${staging}/_site (docker-build-site mounts staging at
+## /work and builds /work/_site).
+# shellcheck disable=SC2016
+sandbox --target "${target}" --pid-scope host run \
+   --sync "${journal_maker}" \
+   --pull "${staging}" \
+   --workdir "${content_dir}" \
+   -- bash -c 'exec bash "${PWD}/docker/docker-build-site.sh" "$1" "${SANDBOX_SYNC_JOURNAL_MAKER}" "${PWD}" "${SANDBOX_SYNC_CSR_BUILD_SITE}"' \
+      bash "${image}"
+
+if [ ! -f "${staging}/_site/index.html" ]; then
+   printf '%s\n' "csr-build: index.html missing in staging after build (pull failed?)" >&2
+   exit 1
+fi
+
+## Mirror the freshly built tree into the artifacts repo's committed _site.
+rsync --archive --delete -- "${staging}/_site/" "${artifacts_dir}/_site/"
+printf '%s\n' "csr-build: built and mirrored into ${artifacts_dir}/_site."
+
+## Run the same gates the Pages deploy runs, here against the mirrored _site, so
+## a wording/link/consistency/SVG failure is caught BEFORE publish. Fails closed
+## via errexit.
+printf '%s\n' "csr-build: running check_site + check_svg_safety gates ..."
+"${check_site}" "${artifacts_dir}/_site"
+"${check_svg_safety}" "${artifacts_dir}/_site"
+printf '%s\n' "csr-build: gates clean."
+
+if [ "${do_commit}" -eq 0 ]; then
+   printf '%s\n' "csr-build: --no-commit; leaving ${artifacts_dir}/_site uncommitted."
+   exit 0
+fi
+
+## CANARY-RECHECK-START
+## Re-check for source edits that raced the multi-minute render (TOCTOU): the
+## pre-build guard ran on the pre-render tree; a concurrent edit landing DURING
+## the render is baked into _site while we publish from committed source. Same
+## scope as the pre-build guard. (Sentinels delimit the block the source-guard
+## regression canary strips.)
+dirty_sources="$(dirty_render_inputs)"
+if [ -n "${dirty_sources}" ]; then
+   printf '%s\n' "csr-build: refusing to publish -- sources changed during the build:" >&2
+   printf '%s\n' "${dirty_sources}" >&2
+   printf '%s\n' "csr-build: re-run so _site matches committed sources." >&2
+   exit 1
+fi
+## CANARY-RECHECK-END
+
+cd -- "${artifacts_dir}"
+
+## Stage the generated tree. .gitignore excludes the binaries (*.pdf/*.docx), so
+## only the cheap text (HTML/.tex/assets) + the .sha512 checksum sidecars are
+## staged -- never a binary.
+git add -- _site
+if git diff --cached --quiet -- _site; then
+   printf '%s\n' "csr-build: _site unchanged; nothing to publish."
+   exit 0
+fi
+
+## Commit the generated tree by EXPLICIT staged paths (scoped, shared-tree safe).
+mapfile -t site_files < <(git diff --cached --name-only -- _site)
+git commit -F - -- "${site_files[@]}" <<'MSG'
+Rebuild site
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+MSG
+
+## Publish: a plain push to each artifacts remote (NOT the git-push wrapper --
+## this is generated output on a direct-to-master deploy repo, and the wrapper
+## would fire the CodeRabbit review trigger on every rebuild). A push to the
+## deploy-home remote IS the Pages deploy.
+for remote in "${artifacts_remotes[@]}"; do
+   printf '%s\n' "csr-build: pushing ${remote} master ..."
+   git push "${remote}" master
+done
+printf '%s\n' "csr-build: committed + pushed to: ${artifacts_remotes[*]}"

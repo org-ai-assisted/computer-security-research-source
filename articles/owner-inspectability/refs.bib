@@ -1,0 +1,1995 @@
+% Android-insecurity references. Cited by @key from paper.md; pandoc --citeproc
+% + the IEEE CSL numbers them by first appearance. Keys are descriptive slugs so
+% inserting a reference never renumbers the body. Titles are {{double-braced}} to
+% preserve the authors' exact casing. urldate is the "accessed" date.
+
+@article{saltzer-schroeder,
+  author = {Saltzer, Jerome H. and Schroeder, Michael D.},
+  title = {{The Protection of Information in Computer Systems}},
+  journal = {{Proceedings of the IEEE}},
+  volume = {63},
+  number = {9},
+  year = {1975},
+  pages = {1278--1308},
+  doi = {10.1109/PROC.1975.9939},
+}
+
+@inproceedings{clark-wilson,
+  author = {Clark, David D. and Wilson, David R.},
+  title = {{A Comparison of Commercial and Military Computer Security Policies}},
+  booktitle = {{Proceedings of the 1987 IEEE Symposium on Security and Privacy}},
+  year = {1987},
+  pages = {184--194},
+  doi = {10.1109/SP.1987.10001},
+}
+
+@misc{poettering-developer-mode,
+  author = {Poettering, Lennart},
+  title = {{Fitting Everything Together}},
+  howpublished = {{0pointer.net blog; the "Developer Mode" section}},
+  year = {2022},
+  url = {https://0pointer.net/blog/fitting-everything-together.html},
+  urldate = {2026-11-02},
+}
+
+@misc{aosp-apex,
+  author = {{Google}},
+  title = {{Android Pony EXpress (APEX) container format}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/ota/apex},
+  urldate = {2026-11-02},
+}
+
+@misc{aosp-conscrypt,
+  author = {{Google}},
+  title = {{Conscrypt module: updatable root trust store}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/ota/modular-system/conscrypt},
+  urldate = {2026-11-04},
+}
+
+@misc{systemd-sysext,
+  author = {{systemd project}},
+  title = {{systemd-sysext: system and configuration extension images}},
+  howpublished = {{systemd manual}},
+  url = {https://www.freedesktop.org/software/systemd/man/latest/systemd-sysext.html},
+  urldate = {2026-11-02},
+}
+
+@misc{avbroot,
+  author = {{chenxiaolong}},
+  title = {{avbroot: re-sign Android OTA images with custom keys and optional root}},
+  howpublished = {{Software project}},
+  url = {https://github.com/chenxiaolong/avbroot},
+  urldate = {2026-11-02},
+}
+
+@misc{kernelsu,
+  author = {{KernelSU project}},
+  title = {{KernelSU: kernel-based root for Android with app-profile scoping}},
+  howpublished = {{Software project}},
+  url = {https://github.com/tiann/KernelSU},
+  urldate = {2026-11-02},
+}
+
+@misc{shizuku,
+  author = {{Rikka Apps}},
+  title = {{Shizuku: system-API access at ADB/shell privilege via a brokered process}},
+  howpublished = {{Software project; see also Sui, github.com/RikkaApps/Sui}},
+  url = {https://github.com/RikkaApps/Shizuku},
+  urldate = {2026-11-02},
+}
+
+@misc{aosp-cdd,
+  author = {{Google}},
+  title = {{Android Compatibility Definition Document}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/compatibility/cdd},
+  urldate = {2026-11-02},
+}
+
+@inproceedings{zhang-root-providers,
+  author = {Zhang, Hang and She, Dongdong and Qian, Zhiyun},
+  title = {{Android Root and its Providers: A Double-Edged Sword}},
+  booktitle = {{Proceedings of the 22nd ACM SIGSAC Conference on Computer and Communications Security (CCS)}},
+  year = {2015},
+  pages = {1093--1104},
+  doi = {10.1145/2810103.2813714},
+}
+
+@inproceedings{sadeghi-property-attestation,
+  author = {Sadeghi, Ahmad-Reza and St{\"u}ble, Christian},
+  title = {{Property-based Attestation for Computing Platforms: Caring about Properties, not Mechanisms}},
+  booktitle = {{Proceedings of the 2004 Workshop on New Security Paradigms (NSPW)}},
+  year = {2004},
+  pages = {67--77},
+  doi = {10.1145/1065907.1066038},
+}
+
+@misc{aosp-selinux,
+  author = {{Android Open Source Project}},
+  title = {{Security-Enhanced Linux in Android}},
+  howpublished = {{Android Developers}},
+  url = {https://source.android.com/docs/security/features/selinux},
+  urldate = {2026-10-25},
+}
+
+@misc{kernel-lockdown,
+  author = {{man7.org}},
+  title = {{kernel\_lockdown(7) -- Linux manual page}},
+  url = {https://man7.org/linux/man-pages/man7/kernel_lockdown.7.html},
+  urldate = {2026-10-25},
+}
+
+@misc{kernel-module-signing,
+  author = {{The Linux Kernel}},
+  title = {{Kernel module signing facility}},
+  howpublished = {{The Linux Kernel documentation}},
+  url = {https://docs.kernel.org/admin-guide/module-signing.html},
+  urldate = {2026-10-25},
+}
+
+@misc{kernel-modules-disabled,
+  author = {{The Linux Kernel}},
+  title = {{Documentation for /proc/sys/kernel/ (kernel.modules\_disabled)}},
+  howpublished = {{The Linux Kernel documentation}},
+  url = {https://docs.kernel.org/admin-guide/sysctl/kernel.html},
+  urldate = {2026-10-25},
+}
+
+@misc{aosp-verified-boot,
+  author = {{Android Open Source Project}},
+  title = {{Verified Boot}},
+  url = {https://source.android.com/docs/security/features/verifiedboot},
+  urldate = {2026-10-25},
+}
+
+@misc{aosp-bootloader-locking,
+  author = {{Android Open Source Project}},
+  title = {{Locking and unlocking the bootloader}},
+  howpublished = {{Android Developers}},
+  url = {https://source.android.com/docs/core/architecture/bootloader/locking_unlocking},
+  urldate = {2026-10-25},
+}
+
+@article{rowlingson-forensic-readiness,
+  author = {Rowlingson, R.},
+  title = {{A ten step process for forensic readiness}},
+  journal = {{International Journal of Digital Evidence}},
+  volume = {2},
+  number = {3},
+  pages = {1--28},
+  year = {2004},
+  url = {https://www.utica.edu/academic/institutes/ecii/publications/articles/A0B13342-B4E0-1F6A-156F501C49CF5F51.pdf},
+  urldate = {2026-10-31},
+}
+
+@misc{iso-27043,
+  author = {{International Organization for Standardization}},
+  title = {{ISO/IEC 27043:2015, Information technology -- Security techniques -- Incident investigation principles and processes}},
+  address = {Geneva, Switzerland},
+  year = {2015},
+  url = {https://www.iso.org/standard/44407.html},
+  urldate = {2026-10-31},
+}
+
+@article{mayrhofer-android-security-model,
+  author = {Mayrhofer, R. and Vander Stoep, J. and Brubaker, C. and Kralevich, N.},
+  title = {{The Android platform security model}},
+  journal = {{ACM Transactions on Privacy and Security}},
+  volume = {24},
+  number = {3},
+  pages = {1--35},
+  year = {2021},
+  note = {art. 19},
+  doi = {10.1145/3448609},
+}
+
+@techreport{nist-sp800-101r1,
+  author = {Ayers, R. and Brothers, S. and Jansen, W.},
+  title = {{Guidelines on Mobile Device Forensics}},
+  institution = {{National Institute of Standards and Technology}},
+  number = {NIST Special Publication 800-101 Revision 1},
+  month = may,
+  year = {2014},
+  doi = {10.6028/NIST.SP.800-101r1},
+}
+
+@article{son-android-data-integrity,
+  author = {Son, Namheun and Lee, Yunho and Kim, Dohyun and James, Joshua I. and Lee, Sangjin and Lee, Kyungho},
+  title = {{A study of user data integrity during acquisition of Android devices}},
+  journal = {Digital Investigation},
+  volume = {10},
+  pages = {S3--S11},
+  year = {2013},
+  note = {The Proceedings of the Thirteenth Annual DFRWS Conference},
+  doi = {10.1016/j.diin.2013.06.001},
+  url = {https://dfrws.org/sites/default/files/session-files/2013_USA_paper-a_study_of_user_data_integrity_during_acquisition_of_android_devices.pdf},
+  urldate = {2026-11-01},
+}
+
+@article{vidas-android-collection,
+  author = {Vidas, Timothy and Zhang, Chengye and Christin, Nicolas},
+  title = {{Toward a general collection methodology for Android devices}},
+  journal = {Digital Investigation},
+  volume = {8},
+  pages = {S14--S24},
+  year = {2011},
+  note = {The Proceedings of the Eleventh Annual DFRWS Conference},
+  doi = {10.1016/j.diin.2011.05.003},
+  url = {https://www.andrew.cmu.edu/user/nicolasc/publications/VZC-DFRWS11.pdf},
+  urldate = {2026-11-01},
+}
+
+@misc{amnesty-pegasus-methodology,
+  author = {{Amnesty International, Security Lab}},
+  title = {{Forensic Methodology Report: How to Catch NSO Group's Pegasus}},
+  month = jul,
+  year = {2021},
+  url = {https://www.amnesty.org/en/latest/research/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/},
+  urldate = {2026-10-25},
+}
+
+@misc{mvt-android-methodology,
+  author = {{Mobile Verification Toolkit}},
+  title = {{Methodology for Android forensic}},
+  howpublished = {{MVT Documentation}},
+  url = {https://docs.mvt.re/en/latest/android/methodology/},
+  urldate = {2026-10-25},
+}
+
+@inproceedings{guri-joker-jtag,
+  author = {Guri, M. and Poliak, Y.},
+  title = {{JoKER: Trusted detection of kernel rootkits in Android devices via JTAG interface}},
+  booktitle = {{Proc. IEEE Trustcom/BigDataSE/ISPA}},
+  address = {Helsinki, Finland},
+  pages = {65--73},
+  year = {2015},
+  doi = {10.1109/Trustcom.2015.358},
+}
+
+@inproceedings{bickford-rootkits-smartphones,
+  author = {Bickford, J. and O'Hare, R. and Baliga, A. and Ganapathy, V. and Iftode, L.},
+  title = {{Rootkits on smart phones: Attacks, implications and opportunities}},
+  booktitle = {{Proc. 11th Workshop on Mobile Computing Systems and Applications (HotMobile)}},
+  address = {Annapolis, MD, USA},
+  pages = {49--54},
+  year = {2010},
+  doi = {10.1145/1734583.1734596},
+}
+
+@mastersthesis{brodbeck-covert-rootkit-detection,
+  author = {Brodbeck, R. C.},
+  title = {{Covert Android Rootkit Detection: Evaluating Mobile Device Operating System Security}},
+  school = {{Air Force Institute of Technology}},
+  address = {Wright-Patterson AFB, OH, USA},
+  year = {2012},
+  note = {M.S. thesis, Dept. Electrical and Computer Engineering},
+  url = {https://scholar.afit.edu/etd/1083},
+  urldate = {2026-10-25},
+}
+
+@inproceedings{chen-anti-virtualization,
+  author = {Chen, X. and Andersen, J. and Mao, Z. M. and Bailey, M. and Nazario, J.},
+  title = {{Towards an understanding of anti-virtualization and anti-debugging behavior in modern malware}},
+  booktitle = {{Proc. IEEE/IFIP Int. Conf. Dependable Systems and Networks (DSN)}},
+  pages = {177--186},
+  year = {2008},
+  doi = {10.1109/DSN.2008.4630086},
+}
+
+@inproceedings{ruggia-evasive-malware,
+  author = {Ruggia, A. and others},
+  title = {{Unmasking the veiled: A comprehensive analysis of Android evasive malware}},
+  booktitle = {{Proc. ACM ASIA Conf. Computer and Communications Security (ASIA CCS)}},
+  year = {2024},
+  doi = {10.1145/3634737.3637658},
+}
+
+@inproceedings{garfinkel-anti-forensics,
+  author = {Garfinkel, S.},
+  title = {{Anti-forensics: Techniques, detection and countermeasures}},
+  booktitle = {{Proc. 2nd Int. Conf. on i-Warfare and Security (ICIW)}},
+  pages = {77--84},
+  year = {2007},
+  url = {https://simson.net/clips/academic/2007.ICIW.AntiForensics.pdf},
+  urldate = {2026-10-25},
+}
+
+@misc{play-integrity-improvements,
+  author = {{Android Developers}},
+  title = {{Play Integrity API: improved verdicts in Android 13 and later devices}},
+  url = {https://developer.android.com/google/play/integrity/improvements},
+  urldate = {2026-10-25},
+}
+
+@misc{google-play-help,
+  author = {{Google}},
+  title = {{How to add and use accounts in the Google Play Store on your device}},
+  howpublished = {{Google Play Help}},
+  url = {https://support.google.com/googleplay/answer/2521798},
+  urldate = {2026-11-01},
+}
+
+@inproceedings{leith-handset-privacy,
+  author = {Leith, D. J.},
+  title = {{Mobile handset privacy: Measuring the data iOS and Android send to Apple and Google}},
+  booktitle = {{Proc. 17th EAI Int. Conf. Security and Privacy in Communication Networks (SecureComm)}},
+  series = {LNICST vol. 399},
+  publisher = {Springer},
+  year = {2021},
+  url = {https://www.scss.tcd.ie/Doug.Leith/pubs/apple_google2.pdf},
+  urldate = {2026-10-25},
+}
+
+@misc{google-device-config-service,
+  author = {{Google}},
+  title = {{Android Device Configuration Service}},
+  howpublished = {{Google Account Help}},
+  url = {https://support.google.com/android/answer/9021432},
+  urldate = {2026-10-25},
+}
+
+@misc{aosp-sepolicy-gmscore,
+  author = {{Android Open Source Project}},
+  title = {{SELinux policy: system/sepolicy/private/gmscore\_app.te}},
+  howpublished = {{Android Googlesource}},
+  url = {https://android.googlesource.com/platform/system/sepolicy/+/refs/heads/main/private/gmscore_app.te},
+  urldate = {2026-10-25},
+}
+
+@misc{aosp-auto-backup,
+  author = {{Android Developers}},
+  title = {{Back up user data with Auto Backup}},
+  howpublished = {{Android Developers}},
+  url = {https://developer.android.com/identity/data/autobackup},
+  urldate = {2026-10-25},
+}
+
+@misc{aosp-file-based-encryption,
+  author = {{Android Open Source Project}},
+  title = {{File-Based Encryption}},
+  howpublished = {{Android Developers}},
+  url = {https://source.android.com/docs/security/encryption/file-based},
+  urldate = {2026-10-25},
+}
+
+@misc{safetynet-attestation-deprecation,
+  author = {{Android Developers}},
+  title = {{SafetyNet Attestation API deprecation timeline}},
+  url = {https://developer.android.com/privacy-and-security/safetynet/deprecation-timeline},
+  urldate = {2026-11-01},
+}
+
+@misc{play-integrity-overview,
+  author = {{Android Developers}},
+  title = {{Overview of the Play Integrity API}},
+  url = {https://developer.android.com/google/play/integrity/overview},
+  urldate = {2026-10-25},
+}
+
+@misc{android-allowbackup,
+  author = {{Android Developers}},
+  title = {{The Application Element: android:allowBackup}},
+  howpublished = {{Android Developers, App Manifest reference}},
+  url = {https://developer.android.com/guide/topics/manifest/application-element},
+  urldate = {2026-10-31},
+}
+
+@misc{aosp-key-id-attestation,
+  author = {{Android Open Source Project}},
+  title = {{Key and ID Attestation}},
+  url = {https://source.android.com/docs/security/features/keystore/attestation},
+  urldate = {2026-10-25},
+}
+
+@misc{owasp-mastg-play-integrity,
+  author = {{OWASP Mobile Application Security Testing Guide}},
+  title = {{MASTG-KNOW-0035: Google Play Integrity API}},
+  url = {https://mas.owasp.org/MASTG/knowledge/android/MASVS-RESILIENCE/MASTG-KNOW-0035/},
+  urldate = {2026-10-25},
+}
+
+@misc{macdonald-attestlens,
+  author = {MacDonald, C. and Herwig, S.},
+  title = {{AttestLens: A large-scale measurement of Play Integrity adoption in Android apps}},
+  howpublished = {{College of William \& Mary, Williamsburg, VA, USA}},
+  year = {2025},
+  url = {https://vsgc.odu.edu/wp-content/uploads/2026/04/MacDonald_Collin_Paper.pdf},
+  urldate = {2026-10-25},
+  note = {Student-conference preprint, not yet peer-reviewed; measures whether apps reference or invoke the attestation APIs, not whether they refuse to run on a failing device.},
+}
+
+@inproceedings{steinboeck-sok-hardening,
+  author = {Steinboeck, M. and Troost, J. and van Beijnum, W. and Seredynski, J. and Bos, H. and Lindorfer, M. and Continella, A.},
+  title = {{SoK: Hardening techniques in the mobile ecosystem -- are we there yet?}},
+  booktitle = {{Proc. IEEE 10th European Symp. Security and Privacy (EuroS\&P)}},
+  address = {Venice, Italy},
+  pages = {789--806},
+  year = {2025},
+  doi = {10.1109/EuroSP63326.2025.00050},
+}
+
+@misc{privsecdev-banking-grapheneos,
+  author = {{akc3n, Tommy, and spring-onion}},
+  title = {{Banking applications compatibility with GrapheneOS}},
+  howpublished = {{PrivSec.dev}},
+  url = {https://privsec.dev/posts/android/banking-applications-compatibility-with-grapheneos/},
+  urldate = {2026-10-25},
+  note = {Crowd-sourced community reports; no standardized methodology or totals.},
+}
+
+@misc{grapheneos-attestation-compat,
+  author = {{GrapheneOS}},
+  title = {{Attestation compatibility guide}},
+  url = {https://grapheneos.org/articles/attestation-compatibility-guide},
+  urldate = {2026-10-25},
+  note = {First-party project documentation; an interested party.},
+}
+
+@misc{patent-secure-jtag,
+  title = {{Device having secure JTAG and debugging method for the same}},
+  howpublished = {{U.S. Patent US9633185B2}},
+  url = {https://patents.google.com/patent/US9633185B2/en},
+  urldate = {2026-10-25},
+}
+
+@inproceedings{sguigna-jtag-attack-surface,
+  author = {Sguigna, A.},
+  title = {{Mitigating JTAG as an attack surface}},
+  booktitle = {{Proc. IEEE AUTOTESTCON}},
+  address = {National Harbor, MD, USA},
+  pages = {1--7},
+  year = {2019},
+  note = {ISBN 978-1-7281-2832-0},
+  doi = {10.1109/AUTOTESTCON43700.2019.8961076},
+}
+
+@article{breeuwsma-jtag-imaging,
+  author = {Breeuwsma, M. F.},
+  title = {{Forensic imaging of embedded systems using JTAG (boundary-scan)}},
+  journal = {{Digital Investigation}},
+  volume = {3},
+  number = {1},
+  pages = {32--42},
+  year = {2006},
+  doi = {10.1016/j.diin.2006.01.003},
+}
+
+@misc{thalium-rkchk,
+  author = {{Thalium}},
+  title = {{rkchk: A Rust Linux kernel module for loadable-kernel-module rootkit detection}},
+  howpublished = {{GitHub}},
+  url = {https://github.com/thalium/rkchk},
+  urldate = {2026-10-25},
+}
+
+@misc{openwall-lkrg,
+  author = {{Openwall}},
+  title = {{LKRG: Linux Kernel Runtime Guard}},
+  url = {https://lkrg.org/},
+  urldate = {2026-10-25},
+}
+
+@misc{elstel-debcheckroot,
+  author = {{elstel.org}},
+  title = {{debcheckroot: boot-media integrity check of installed files}},
+  url = {https://www.elstel.org/debcheckroot/},
+  urldate = {2026-10-25},
+}
+
+@misc{socialtic-log-forensics,
+  author = {{SocialTIC}},
+  title = {{Introduction to log-based forensics on Android devices}},
+  howpublished = {{Consensual Digital Forensics documentation}},
+  url = {https://forensics.socialtic.org/en/explainers/03-explainer-log-forensics-android/index.html},
+  urldate = {2026-10-25},
+}
+
+@misc{aosp-full-disk-encryption,
+  author = {{Android Open Source Project}},
+  title = {{Full-disk encryption: storing the encrypted key}},
+  howpublished = {{Android Developers}},
+  url = {https://source.android.com/security/encryption/full-disk#storing_the_encrypted_key},
+  urldate = {2026-10-25},
+}
+
+@misc{grapheneos-auditor,
+  author = {{GrapheneOS}},
+  title = {{Auditor: hardware-backed remote attestation}},
+  url = {https://attestation.app/about},
+  urldate = {2026-10-25},
+}
+
+@misc{grapheneos-auditor-tutorial,
+  author = {{GrapheneOS}},
+  title = {{Auditor: Tutorial (local and remote verification)}},
+  url = {https://attestation.app/tutorial},
+  urldate = {2026-11-02},
+}
+
+@misc{grapheneos-attestation-400,
+  author = {{GrapheneOS Discussion Forum}},
+  title = {{Remote attestation response code 400}},
+  howpublished = {{discuss.grapheneos.org, discussion 24128}},
+  year = {2025},
+  url = {https://discuss.grapheneos.org/d/24128},
+  urldate = {2026-11-02},
+}
+
+@misc{diamaneos-attestation,
+  author = {{DiamaneOS}},
+  title = {{AttestationServer downstream notes: pairings without a manufacturer root}},
+  howpublished = {{DiamaneOS/AttestationServer (fork of GrapheneOS/AttestationServer), DOWNSTREAM.md}},
+  url = {https://github.com/DiamaneOS/AttestationServer/blob/0308fc1e2be2188441c17db907d84bdda2578951/DOWNSTREAM.md},
+  urldate = {2026-11-02},
+}
+
+@misc{resign-android-image,
+  author = {{chriswoope}},
+  title = {{resign-android-image: resign GrapheneOS images with your own signing keys}},
+  howpublished = {{GitHub, chriswoope/resign-android-image}},
+  url = {https://github.com/chriswoope/resign-android-image/tree/aca8607e8421708107a324736f0d79facd399676},
+  urldate = {2026-11-02},
+}
+
+@misc{grapheneos-auditor-domain,
+  author = {{GrapheneOS}},
+  title = {{Auditor: RemoteVerifyJob.java -- hardcoded attestation server domain}},
+  howpublished = {{GrapheneOS/Auditor source, app/src/main/java/app/attestation/auditor/RemoteVerifyJob.java}},
+  url = {https://github.com/GrapheneOS/Auditor/blob/d5d326453e6e3b328d7a11198d9f99174ac7f4f3/app/src/main/java/app/attestation/auditor/RemoteVerifyJob.java},
+  urldate = {2026-11-02},
+}
+
+@misc{grapheneos-auditor-issue140,
+  author = {{GrapheneOS}},
+  title = {{Scanned invalid account QR code (AttestationServer issue 140)}},
+  howpublished = {{GrapheneOS/AttestationServer issue tracker; maintainers confirm the official Auditor hardcodes its server, so both the app and the server must be modified for self-hosting}},
+  url = {https://github.com/GrapheneOS/AttestationServer/issues/140},
+  urldate = {2026-11-02},
+  note = {First-party project maintainers; an interested party.},
+}
+
+@misc{robotnix-attestation,
+  author = {{robotnix contributors}},
+  title = {{robotnix: attestation module (owner-key Auditor and AttestationServer)}},
+  howpublished = {{nix-community/robotnix, docs/src/modules/attestation.md}},
+  url = {https://github.com/nix-community/robotnix/blob/b731f1aa2bfd26763714495a12ad50f6a9bd12ca/docs/src/modules/attestation.md},
+  urldate = {2026-11-02},
+}
+
+@misc{grapheneos-auditor-usecase,
+  author = {{GrapheneOS}},
+  title = {{Use case for the Auditor app with AVB (GrapheneOS Discussion Forum, d/8235)}},
+  howpublished = {{discuss.grapheneos.org; the official GrapheneOS account (forum moderator) states the Auditor enforces a whitelisted verified-boot key and never allows arbitrary yellow-boot-state key fingerprints}},
+  year = {2023},
+  url = {https://discuss.grapheneos.org/d/8235-can-someone-explain-to-me-the-use-case-for-the-auditor-app-with-avb-enabled/4},
+  urldate = {2026-11-02},
+}
+
+@misc{grapheneos-auditor-source,
+  author = {{GrapheneOS}},
+  title = {{Auditor: AttestationProtocol.java -- compiled verified-boot key allowlist}},
+  howpublished = {{GrapheneOS/Auditor source, app/src/main/java/app/attestation/auditor/AttestationProtocol.java}},
+  url = {https://github.com/GrapheneOS/Auditor/blob/d5d326453e6e3b328d7a11198d9f99174ac7f4f3/app/src/main/java/app/attestation/auditor/AttestationProtocol.java},
+  urldate = {2026-11-02},
+  note = {First-party project source; an interested party.},
+}
+
+@misc{grapheneos-attestation-server,
+  author = {{GrapheneOS}},
+  title = {{AttestationServer}},
+  howpublished = {{GrapheneOS source repository}},
+  url = {https://github.com/GrapheneOS/AttestationServer},
+  urldate = {2026-11-01},
+  note = {First-party project source; an interested party.},
+}
+
+@misc{grapheneos-root-statement,
+  author = {Micay, Daniel},
+  title = {{Comment on verified boot and an on-device root terminal}},
+  howpublished = {{Hacker News item 39675220; Daniel Micay (user strcat), GrapheneOS founder and lead developer}},
+  year = {2024},
+  url = {https://news.ycombinator.com/item?id=39675220},
+  urldate = {2026-11-02},
+}
+
+@misc{grapheneos-root-forum,
+  author = {{GrapheneOS}},
+  title = {{On adding root: verified boot and attestation (GrapheneOS Discussion Forum, d/2275)}},
+  howpublished = {{discuss.grapheneos.org; the official GrapheneOS project account, replying to a root-enabled fork}},
+  year = {2022},
+  url = {https://discuss.grapheneos.org/d/2275-will-gos-and-root-related-issues/8},
+  urldate = {2026-11-02},
+}
+
+@misc{calyxos-root-faq,
+  author = {{CalyxOS}},
+  title = {{Is it possible to root CalyxOS? (Security FAQ)}},
+  howpublished = {{CalyxOS documentation}},
+  url = {https://calyxos.org/docs/guide/security/security-faq/},
+  urldate = {2026-11-02},
+}
+
+@misc{divestos-root-faq,
+  author = {{DivestOS}},
+  title = {{FAQ: root and runtime modification frameworks}},
+  howpublished = {{DivestOS website (project discontinued); archived at the Internet Archive}},
+  year = {2024},
+  url = {https://web.archive.org/web/20240525181913/https://divestos.org/pages/faq},
+  urldate = {2026-11-02},
+  note = {Project discontinued; Internet Archive capture of 2024-05-25.},
+}
+
+@misc{google-play-protect,
+  author = {{Google}},
+  title = {{Google Play Protect}},
+  howpublished = {{Android Developers documentation}},
+  url = {https://developers.google.com/android/play-protect},
+  urldate = {2026-11-01},
+}
+
+@misc{avast-mobile-faq,
+  author = {{Avast}},
+  title = {{Avast Mobile Security -- Frequently Asked Questions}},
+  howpublished = {{Avast Support}},
+  url = {https://support.avast.com/en-ww/article/mobile-security-faq/},
+  urldate = {2026-11-01},
+}
+
+@misc{kaspersky-android,
+  author = {{Kaspersky}},
+  title = {{About Kaspersky app for Android}},
+  howpublished = {{Kaspersky Online Help}},
+  url = {https://support.kaspersky.com/kis-for-android/11.106/141191},
+  urldate = {2026-11-01},
+}
+
+@misc{aosp-app-sandbox,
+  author = {{Android Open Source Project}},
+  title = {{Application Sandbox}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/security/app-sandbox},
+  urldate = {2026-11-01},
+}
+
+@misc{aosp-root-process-isolation,
+  author = {{Android Open Source Project}},
+  title = {{Implement security: isolate root processes}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/security/overview/implement},
+  urldate = {2026-11-01},
+}
+
+@misc{tag-buying-spying,
+  author = {{Google Threat Analysis Group}},
+  title = {{Buying Spying: how the commercial surveillance industry works and what can be done about it}},
+  howpublished = {{Google Threat Analysis Group}},
+  year = {2024},
+  url = {https://blog.google/threat-analysis-group/commercial-surveillance-vendors-google-tag-report/},
+  urldate = {2026-11-01},
+}
+
+@misc{tag-cytrox,
+  author = {{Google Threat Analysis Group}},
+  title = {{Protecting Android users from 0-Day attacks}},
+  howpublished = {{Google Threat Analysis Group}},
+  year = {2022},
+  url = {https://blog.google/threat-analysis-group/protecting-android-users-from-0-day-attacks/},
+  urldate = {2026-11-01},
+}
+
+@misc{projectzero-itw,
+  author = {{Google Project Zero}},
+  title = {{0day ``In the Wild''}},
+  howpublished = {{Google Project Zero}},
+  url = {https://projectzero.google/0day.html},
+  urldate = {2026-11-01},
+}
+
+@misc{talos-predator,
+  author = {{Cisco Talos}},
+  title = {{Mercenary mayhem: a technical analysis of Intellexa's PREDATOR spyware}},
+  howpublished = {{Cisco Talos Intelligence}},
+  year = {2023},
+  url = {https://blog.talosintelligence.com/mercenary-intellexa-predator/},
+  urldate = {2026-11-01},
+}
+
+@misc{hegel-modifiedelephant-2022,
+  author = {Hegel, Tom},
+  title = {{ModifiedElephant APT and a Decade of Fabricating Evidence}},
+  howpublished = {{SentinelOne Labs}},
+  year = {2022},
+  month = feb,
+  url = {https://www.sentinelone.com/labs/modifiedelephant-apt-and-a-decade-of-fabricating-evidence/},
+  urldate = {2026-11-04},
+}
+
+@book{sikorski-practical-malware,
+  author = {Sikorski, Michael and Honig, Andrew},
+  title = {{Practical Malware Analysis: The Hands-On Guide to Dissecting Malicious Software}},
+  publisher = {{No Starch Press}},
+  year = {2012},
+  isbn = {9781593272906},
+  nolink = {printed book, cited by ISBN},
+}
+
+@book{ligh-memory-forensics,
+  author = {Ligh, Michael Hale and Case, Andrew and Levy, Jamie and Walters, AAron},
+  title = {{The Art of Memory Forensics: Detecting Malware and Threats in Windows, Linux, and Mac Memory}},
+  publisher = {{Wiley}},
+  year = {2014},
+  isbn = {9781118825099},
+  nolink = {printed book, cited by ISBN},
+}
+
+@book{spitzner-honeypots,
+  author = {Spitzner, Lance},
+  title = {{Honeypots: Tracking Hackers}},
+  publisher = {{Addison-Wesley}},
+  year = {2002},
+  isbn = {9780321108951},
+  nolink = {printed book, cited by ISBN},
+}
+
+@misc{raymond-cathedral-bazaar,
+  author = {Raymond, Eric S.},
+  title = {{The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary}},
+  publisher = {{O'Reilly}},
+  year = {1999},
+  url = {http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/},
+  urldate = {2026-11-04},
+}
+
+@misc{wheeler-heartbleed,
+  author = {Wheeler, David A.},
+  title = {{How to Prevent the Next Heartbleed}},
+  year = {2014},
+  note = {revised 2024},
+  url = {https://dwheeler.com/essays/heartbleed},
+  urldate = {2026-11-04},
+}
+
+@inproceedings{petroni-copilot,
+  author = {Petroni, Nick L. and Fraser, Timothy and Molina, Jesus and Arbaugh, William A.},
+  title = {{Copilot -- a Coprocessor-based Kernel Runtime Integrity Monitor}},
+  booktitle = {{Proceedings of the 13th USENIX Security Symposium}},
+  year = {2004},
+  pages = {179--194},
+  url = {https://www.usenix.org/legacy/publications/library/proceedings/sec04/tech/full_papers/petroni/petroni.pdf},
+  urldate = {2026-11-04},
+}
+
+@inproceedings{mccune-flicker,
+  author = {McCune, Jonathan M. and Parno, Bryan J. and Perrig, Adrian and Reiter, Michael K. and Isozaki, Hiroshi},
+  title = {{Flicker: An Execution Infrastructure for TCB Minimization}},
+  booktitle = {{Proceedings of the 3rd ACM SIGOPS/EuroSys European Conference on Computer Systems}},
+  year = {2008},
+  pages = {315--328},
+  doi = {10.1145/1352592.1352625},
+}
+
+@inproceedings{embleton-smm-rootkit,
+  author = {Embleton, Shawn and Sparks, Sherri and Zou, Cliff},
+  title = {{SMM Rootkits: A New Breed of OS Independent Malware}},
+  booktitle = {{Proceedings of the 4th International Conference on Security and Privacy in Communication Networks (SecureComm)}},
+  year = {2008},
+  doi = {10.1145/1460877.1460892},
+}
+
+@misc{tcg-tpm-library,
+  author = {{Trusted Computing Group}},
+  title = {{Trusted Platform Module Library Specification, Family 2.0}},
+  howpublished = {{TCG Published, Revision 01.59}},
+  year = {2019},
+  url = {https://trustedcomputinggroup.org/resource/tpm-library-specification/},
+  urldate = {2026-11-04},
+}
+
+@misc{amd-sev-snp,
+  author = {{Advanced Micro Devices}},
+  title = {{AMD SEV-SNP: Strengthening VM Isolation with Integrity Protection and More}},
+  howpublished = {{AMD White Paper}},
+  year = {2020},
+  url = {https://www.amd.com/content/dam/amd/en/documents/epyc-business-docs/white-papers/SEV-SNP-strengthening-vm-isolation-with-integrity-protection-and-more.pdf},
+  urldate = {2026-11-04},
+}
+
+@misc{aosp-adb-root,
+  author = {{Android Open Source Project}},
+  title = {{How does ADB root/unroot work?}},
+  howpublished = {{Android platform adb documentation}},
+  url = {https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/dev/root.md},
+  urldate = {2026-11-01},
+}
+
+@misc{luks-cryptsetup-faq,
+  author = {{cryptsetup project}},
+  title = {{cryptsetup Frequently Asked Questions}},
+  howpublished = {{cryptsetup project wiki}},
+  url = {https://gitlab.com/cryptsetup/cryptsetup/-/wikis/FrequentlyAskedQuestions},
+  urldate = {2026-11-01},
+}
+
+@techreport{nist-sp800-86,
+  author = {Kent, K. and Chevalier, S. and Grance, T. and Dang, H.},
+  title = {{Guide to Integrating Forensic Techniques into Incident Response}},
+  institution = {{National Institute of Standards and Technology}},
+  number = {NIST Special Publication 800-86},
+  month = aug,
+  year = {2006},
+  doi = {10.6028/NIST.SP.800-86},
+  url = {https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-86.pdf},
+  urldate = {2026-11-01},
+}
+
+@misc{aosp-open-source,
+  author = {{Android Open Source Project}},
+  title = {{Content License}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/license},
+  urldate = {2026-11-01},
+}
+
+@misc{google-driver-binaries,
+  author = {{Google}},
+  title = {{Driver Binaries for Nexus and Pixel Devices}},
+  howpublished = {{Google for Developers}},
+  url = {https://developers.google.com/android/drivers},
+  urldate = {2026-11-01},
+}
+
+@misc{google-gms,
+  author = {{Google}},
+  title = {{Google Mobile Services}},
+  howpublished = {{android.com}},
+  url = {https://www.android.com/gms/},
+  urldate = {2026-11-01},
+}
+
+@techreport{nistSP800124r2,
+  author = {Howell, Gema and Franklin, Joshua M. and Sritapan, Vincent and Souppaya, Murugiah and Scarfone, Karen},
+  title = {{Guidelines for Managing the Security of Mobile Devices in the Enterprise}},
+  institution = {{National Institute of Standards and Technology}},
+  number = {NIST Special Publication 800-124r2},
+  year = {2023},
+  month = may,
+  doi = {10.6028/NIST.SP.800-124r2},
+  url = {https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-124r2.pdf},
+  urldate = {2026-11-01},
+}
+
+@misc{hill2007antifeatures,
+  author = {Hill, Benjamin Mako},
+  title = {{Antifeatures}},
+  howpublished = {{Free Software Foundation Bulletin, no. 11, Fall 2007}},
+  year = {2007},
+  url = {https://www.fsf.org/bulletin/2007/fall/antifeatures/},
+  urldate = {2026-11-01},
+}
+
+@misc{fdroid-antifeatures,
+  author = {{F-Droid Project}},
+  title = {{Anti-Features}},
+  howpublished = {{F-Droid Documentation}},
+  url = {https://f-droid.org/docs/Anti-Features/},
+  urldate = {2026-11-01},
+}
+
+@inproceedings{gamba2020preinstalled,
+  author = {Gamba, Julien and Rashed, Mohammed and Razaghpanah, Abbas and Tapiador, Juan and Vallina-Rodriguez, Narseo},
+  title = {{An Analysis of Pre-installed Android Software}},
+  booktitle = {{2020 IEEE Symposium on Security and Privacy (SP)}},
+  year = {2020},
+  doi = {10.1109/SP40000.2020.00013},
+  url = {https://arxiv.org/abs/1905.02713},
+  urldate = {2026-11-01},
+}
+
+@misc{grapheneos-usage,
+  author = {{GrapheneOS}},
+  title = {{Usage guide}},
+  howpublished = {{GrapheneOS Documentation}},
+  url = {https://grapheneos.org/usage},
+  urldate = {2026-10-31},
+}
+
+@misc{grapheneos-install-locking,
+  author = {{GrapheneOS}},
+  title = {{Installation: locking the bootloader}},
+  howpublished = {{GrapheneOS Documentation}},
+  url = {https://grapheneos.org/install/web#locking-the-bootloader},
+  urldate = {2026-10-31},
+}
+
+@misc{grapheneos-setup-wizard,
+  author = {{GrapheneOS}},
+  title = {{Features: setup wizard}},
+  howpublished = {{GrapheneOS Documentation}},
+  url = {https://grapheneos.org/features#setup-wizard},
+  urldate = {2026-10-31},
+}
+
+@misc{grapheneos-build,
+  author = {{GrapheneOS}},
+  title = {{Building GrapheneOS: generating release signing keys}},
+  howpublished = {{GrapheneOS Documentation}},
+  url = {https://grapheneos.org/build#generating-release-signing-keys},
+  urldate = {2026-10-31},
+}
+
+@misc{mitre-attack-evasion,
+  author = {{MITRE}},
+  title = {{ATT\&CK knowledge base: Virtualization/Sandbox Evasion (T1497) and Indicator Removal (T1070)}},
+  url = {https://attack.mitre.org/techniques/T1497/},
+  urldate = {2026-10-25},
+  note = {See also https://attack.mitre.org/techniques/T1070/},
+}
+
+@misc{lookout-chrysaor,
+  author = {{Lookout, Inc.}},
+  title = {{Pegasus for Android: Technical analysis and findings of Chrysaor}},
+  year = {2017},
+  url = {https://info.lookout.com/rs/051-ESQ-475/images/lookout-pegasus-android-technical-analysis.pdf},
+  urldate = {2026-10-25},
+}
+
+@misc{marczak-million-dollar-dissident,
+  author = {Marczak, B. and Scott-Railton, J.},
+  title = {{The million dollar dissident: NSO Group's iPhone zero-days used against a UAE human rights defender}},
+  howpublished = {{Citizen Lab, University of Toronto}},
+  year = {2016},
+  url = {https://citizenlab.ca/2016/08/million-dollar-dissident-iphone-zero-day-nso-group-uae/},
+  urldate = {2026-10-25},
+}
+
+@misc{lookout-pegasus-technical-analysis,
+  author = {{Lookout, Inc.}},
+  title = {{Technical Analysis of Pegasus Spyware: An Investigation Into Highly Sophisticated Espionage Software}},
+  year = {2016},
+  url = {https://info.lookout.com/rs/051-ESQ-475/images/lookout-pegasus-technical-analysis.pdf},
+  urldate = {2026-11-04},
+}
+
+@misc{projectzero-forcedentry,
+  author = {Beer, I. and Gro{\ss}, S.},
+  title = {{A deep dive into an NSO zero-click iMessage exploit: Remote Code Execution}},
+  howpublished = {{Google Project Zero}},
+  year = {2021},
+  url = {https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html},
+  urldate = {2026-11-04},
+}
+
+@misc{owasp-mastg-repackaging,
+  author = {{OWASP}},
+  title = {{OWASP Mobile Application Security Testing Guide: patching, repackaging and re-signing apps}},
+  howpublished = {{OWASP MASTG}},
+  url = {https://mas.owasp.org/MASTG/techniques/android/MASTG-TECH-0038/},
+  urldate = {2026-11-04},
+}
+
+@article{thompson-trusting-trust,
+  author = {Thompson, K.},
+  title = {{Reflections on trusting trust}},
+  journal = {{Communications of the ACM}},
+  volume = {27},
+  number = {8},
+  pages = {761--763},
+  year = {1984},
+  doi = {10.1145/358198.358210},
+}
+
+@misc{rutkowska-state-harmful,
+  author = {Rutkowska, Joanna},
+  title = {{State considered harmful: A proposal for a stateless laptop}},
+  howpublished = {{Invisible Things Lab}},
+  year = {2015},
+  url = {https://blog.invisiblethings.org/2015/12/23/state_harmful.html},
+  urldate = {2026-11-04},
+}
+
+@misc{rfc4949,
+  author = {Shirey, R.},
+  title = {{Internet Security Glossary, Version 2}},
+  howpublished = {{RFC 4949, FYI 36, IETF}},
+  year = {2007},
+  doi = {10.17487/RFC4949},
+  url = {https://www.rfc-editor.org/rfc/rfc4949.txt},
+  urldate = {2026-11-04},
+}
+
+@misc{flame-collision,
+  author = {{Microsoft Security Response Center}},
+  title = {{Flame malware collision attack explained}},
+  howpublished = {{Microsoft Security Research and Defense blog}},
+  year = {2012},
+  url = {https://www.microsoft.com/en-us/msrc/blog/2012/06/flame-malware-collision-attack-explained/},
+  urldate = {2026-11-04},
+}
+
+@inproceedings{juniper-dual-ec,
+  author = {Checkoway, S. and Maskiewicz, J. and Garman, C. and Fried, J. and Cohney, S. and Green, M. and Heninger, N. and Weinmann, R.-P. and Rescorla, E. and Shacham, H.},
+  title = {{A Systematic Analysis of the Juniper Dual EC Incident}},
+  booktitle = {{Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security (CCS)}},
+  pages = {468--479},
+  year = {2016},
+  doi = {10.1145/2976749.2978395},
+  url = {https://eprint.iacr.org/2016/376},
+}
+
+@misc{apple-order-2016,
+  author = {{United States District Court, Central District of California}},
+  title = {{Order Compelling Apple, Inc. to Assist Agents in Search (No. ED 15-0451M)}},
+  year = {2016},
+  url = {https://www.justice.gov/usao-cdca/file/825001/dl},
+  urldate = {2026-11-04},
+}
+
+@misc{tola-2018,
+  author = {{Parliament of Australia}},
+  title = {{Telecommunications and Other Legislation Amendment (Assistance and Access) Act 2018 (Cth), No. 148, 2018}},
+  howpublished = {{Federal Register of Legislation, C2018A00148}},
+  year = {2018},
+  url = {https://www.legislation.gov.au/C2018A00148/asmade/text},
+  urldate = {2026-11-04},
+}
+
+@misc{bsi-tpm-2013,
+  author = {{Federal Office for Information Security (BSI)}},
+  title = {{Stellungnahme des BSI zur aktuellen Berichterstattung zu MS Windows 8 und TPM}},
+  year = {2013},
+  note = {{Press release, 21 Aug 2013; original page returns HTTP 404, archived copy cited}},
+  url = {https://web.archive.org/web/20210125185418/https://www.bsi.bund.de/DE/Presse/Pressemitteilungen/Presse2013/Windows_TPM_Pl_21082013.html},
+  urldate = {2026-11-04},
+}
+
+@misc{usc-50-1881a,
+  author = {{United States Code}},
+  title = {{50 U.S.C. 1881a: Procedures for targeting certain persons outside the United States other than United States persons}},
+  howpublished = {{2023 edition}},
+  url = {https://www.law.cornell.edu/uscode/text/50/1881a},
+  urldate = {2026-11-04},
+}
+
+@misc{usc-18-2709,
+  author = {{United States Code}},
+  title = {{18 U.S.C. 2709: Counterintelligence access to telephone toll and transactional records}},
+  howpublished = {{2023 edition}},
+  url = {https://www.law.cornell.edu/uscode/text/18/2709},
+  urldate = {2026-11-04},
+}
+
+@misc{usc-47-1002,
+  author = {{United States Code}},
+  title = {{47 U.S.C. 1002: Assistance capability requirements (CALEA)}},
+  howpublished = {{2023 edition}},
+  url = {https://www.law.cornell.edu/uscode/text/47/1002},
+  urldate = {2026-11-04},
+}
+
+@misc{lavabit-4cir-2014,
+  author = {{United States Court of Appeals for the Fourth Circuit}},
+  title = {{In re Under Seal (United States v. Lavabit, LLC), 749 F.3d 276}},
+  year = {2014},
+  url = {https://www.ca4.uscourts.gov/opinions/134625.P.pdf},
+  urldate = {2026-11-04},
+}
+
+@misc{inre-directives-2008,
+  author = {{United States Foreign Intelligence Surveillance Court of Review}},
+  title = {{In re Directives Pursuant to Section 105B of the Foreign Intelligence Surveillance Act, 551 F.3d 1004}},
+  year = {2008},
+  url = {https://upload.wikimedia.org/wikipedia/commons/0/0b/In_re_Directives.pdf},
+  urldate = {2026-11-04},
+}
+
+@article{kerr-schneier-2018,
+  author = {Kerr, Orin S. and Schneier, Bruce},
+  title = {{Encryption Workarounds}},
+  journal = {{Georgetown Law Journal}},
+  volume = {106},
+  number = {4},
+  pages = {989--1019},
+  year = {2018},
+  url = {https://www.law.georgetown.edu/georgetown-law-journal/wp-content/uploads/sites/26/2018/07/Encryption-Workarounds.pdf},
+  urldate = {2026-11-04},
+}
+
+@article{keys-under-doormats,
+  author = {Abelson, H. and Anderson, R. and Bellovin, S. M. and Benaloh, J. and Blaze, M. and Diffie, W. and Gilmore, J. and Green, M. and Landau, S. and Neumann, P. G. and Rivest, R. L. and Schiller, J. I. and Schneier, B. and Specter, M. and Weitzner, D. J.},
+  title = {{Keys under doormats: mandating insecurity by requiring government access to all data and communications}},
+  journal = {{Journal of Cybersecurity}},
+  volume = {1},
+  number = {1},
+  pages = {69--79},
+  year = {2015},
+  doi = {10.1093/cybsec/tyv009},
+}
+
+@inproceedings{garfinkel-vmi,
+  author = {Garfinkel, T. and Rosenblum, M.},
+  title = {{A virtual machine introspection based architecture for intrusion detection}},
+  booktitle = {{Proc. Network and Distributed System Security Symp. (NDSS)}},
+  pages = {191--206},
+  year = {2003},
+  url = {https://suif.stanford.edu/papers/vmi-ndss03.pdf},
+  urldate = {2026-10-25},
+}
+
+@misc{talos-rombertik,
+  author = {{Cisco Talos}},
+  title = {{Threat spotlight: Rombertik (analysis of destruct-on-analysis behavior)}},
+  year = {2015},
+  url = {https://blogs.cisco.com/security/talos/rombertik},
+  urldate = {2026-10-25},
+}
+
+@misc{aosp-loadable-kernel-modules,
+  author = {{Android Open Source Project}},
+  title = {{Loadable kernel modules}},
+  howpublished = {{Android Developers}},
+  url = {https://source.android.com/docs/core/architecture/kernel/loadable-kernel-modules},
+  urldate = {2026-10-25},
+}
+
+@article{sudhakar-fileless-malware,
+  author = {Sudhakar and Kumar, S.},
+  title = {{An emerging threat Fileless malware: a survey and research challenges}},
+  journal = {{Cybersecurity}},
+  volume = {3},
+  pages = {1--12},
+  year = {2020},
+  note = {art. 1},
+  doi = {10.1186/s42400-019-0043-x},
+}
+
+@article{yang-live-memory-acquisition,
+  author = {Yang, S. J. and others},
+  title = {{Live acquisition of main memory data from Android smartphones and smartwatches}},
+  journal = {{Digital Investigation}},
+  volume = {23},
+  pages = {50--62},
+  year = {2017},
+  doi = {10.1016/j.diin.2017.09.003},
+}
+
+@misc{aosp-boot-flow,
+  author = {{Android Open Source Project}},
+  title = {{Boot flow}},
+  howpublished = {{Android Developers}},
+  url = {https://source.android.com/docs/security/features/verifiedboot/boot-flow},
+  urldate = {2026-10-25},
+}
+
+@misc{bootloader-wall-of-shame,
+  author = {{zenfyrdev}},
+  title = {{bootloader-unlock-wall-of-shame}},
+  howpublished = {{GitHub}},
+  url = {https://github.com/zenfyrdev/bootloader-unlock-wall-of-shame},
+  urldate = {2026-10-25},
+  note = {Crowd-sourced community tracker; no standardized methodology or totals.},
+}
+
+@misc{magnuson-moss-act,
+  title = {{Magnuson-Moss Warranty Act, 15 U.S.C. sec. 2301 et seq. (1975)}},
+  howpublished = {{U.S. Federal Trade Commission guidance}},
+  url = {https://www.ftc.gov/node/79897},
+  urldate = {2026-10-25},
+}
+
+@misc{eu-directive-2019-771,
+  title = {{Directive (EU) 2019/771 of the European Parliament and of the Council of 20 May 2019 on certain aspects concerning contracts for the sale of goods}},
+  howpublished = {{Official Journal of the European Union, L 136, pp. 28-50}},
+  year = {2019},
+  url = {https://eur-lex.europa.eu/eli/dir/2019/771/oj},
+  urldate = {2026-10-31},
+}
+
+@misc{samsung-knox-hw-security,
+  author = {{Samsung Electronics}},
+  title = {{Hardware-backed security}},
+  howpublished = {{Samsung Knox Documentation}},
+  url = {https://docs.samsungknox.com/admin/fundamentals/whitepaper/samsung-knox-mobile-security/system-security/hw-backed-security/},
+  urldate = {2026-10-25},
+}
+
+@misc{sony-unlock-bootloader,
+  author = {{Sony}},
+  title = {{Unlock bootloader}},
+  howpublished = {{Sony Developer World, Open Devices}},
+  url = {https://developer.sony.com/open-source/aosp-on-xperia-open-devices/get-started/unlock-bootloader},
+  urldate = {2026-10-25},
+}
+
+@misc{qualcomm-secure-boot,
+  author = {{Qualcomm Technologies}},
+  title = {{Enable secure boot}},
+  howpublished = {{Qualcomm Documentation}},
+  url = {https://dragonwingdocs.qualcomm.com/System/Security/enable-secure-boot},
+  urldate = {2026-10-25},
+}
+
+@article{nguyen-vu-android-rooting,
+  author = {Nguyen-Vu, L. and Chau, N.-T. and Kang, S. and Jung, S.},
+  title = {{Android rooting: An arms race between evasion and detection}},
+  journal = {{Security and Communication Networks}},
+  volume = {2017},
+  year = {2017},
+  note = {art. 4121765},
+  doi = {10.1155/2017/4121765},
+}
+
+@inproceedings{zaddach-hdd-backdoor,
+  author = {Zaddach, Jonas and Kurmus, Anil and Balzarotti, Davide and Blass, Erik-Oliver and Francillon, Aur\'elien and Goodspeed, Travis and Gupta, Moitrayee and Koltsidas, Ioannis},
+  title = {{Implementation and Implications of a Stealth Hard-Drive Backdoor}},
+  booktitle = {{Proceedings of the 29th Annual Computer Security Applications Conference (ACSAC)}},
+  pages = {279-288},
+  publisher = {{ACM}},
+  year = {2013},
+  doi = {10.1145/2523649.2523661},
+}
+
+@misc{kaspersky-equation,
+  author = {{Kaspersky Lab, Global Research and Analysis Team}},
+  title = {{Equation: The Death Star of Malware Galaxy}},
+  howpublished = {{Securelist}},
+  url = {https://securelist.com/equation-the-death-star-of-malware-galaxy/68750/},
+  year = {2015},
+  urldate = {2026-10-29},
+  note = {HDD/SSD firmware reflashing module (nls\_933w)},
+}
+
+@misc{kaspersky-equation-qa,
+  author = {{Kaspersky Lab, Global Research and Analysis Team}},
+  title = {{Equation Group: Questions and Answers}},
+  howpublished = {{Version 1.5}},
+  url = {https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2018/03/08064459/Equation_group_questions_and_answers.pdf},
+  year = {2015},
+  urldate = {2026-10-30},
+}
+
+@misc{google-triada,
+  author = {{Google}},
+  title = {{PHA Family Highlights: Triada}},
+  howpublished = {{Google Online Security Blog}},
+  year = {2019},
+  url = {https://security.googleblog.com/2019/06/pha-family-highlights-triada.html},
+  urldate = {2026-10-30},
+}
+
+@misc{apvi-platform-certs,
+  author = {{Android Partner Vulnerability Initiative}},
+  title = {{Platform Certificates Used to Sign Malware}},
+  howpublished = {{APVI Issue 100}},
+  year = {2022},
+  url = {https://bugs.chromium.org/p/apvi/issues/detail?id=100},
+  urldate = {2026-10-30},
+}
+
+@inproceedings{bootstomp,
+  author = {Redini, Nilo and Machiry, Aravind and Das, Dipanjan and Fratantonio, Yanick and Bianchi, Antonio and Gustafson, Eric and Shoshitaishvili, Yan and Kruegel, Christopher and Vigna, Giovanni},
+  title = {{BootStomp: On the Security of Bootloaders in Mobile Devices}},
+  booktitle = {{Proceedings of the 26th USENIX Security Symposium}},
+  pages = {781-798},
+  publisher = {{USENIX Association}},
+  year = {2017},
+  url = {https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/redini},
+  urldate = {2026-10-31},
+}
+
+@inproceedings{shakevsky-trustzone,
+  author = {Shakevsky, Alon and Ronen, Eyal and Wool, Avishai},
+  title = {{Trust Dies in Darkness: Shedding Light on Samsung's TrustZone Keymaster Design}},
+  booktitle = {{Proceedings of the 31st USENIX Security Symposium}},
+  publisher = {{USENIX Association}},
+  year = {2022},
+  url = {https://www.usenix.org/conference/usenixsecurity22/presentation/shakevsky},
+  urldate = {2026-10-31},
+}
+
+@misc{ncc-mediatek-bootrom,
+  author = {Zhuravlev, Ilya},
+  title = {{There's a Hole in Your SoC: Glitching the MediaTek BootROM}},
+  howpublished = {{NCC Group}},
+  year = {2020},
+  url = {https://www.nccgroup.com/research/there-s-a-hole-in-your-soc-glitching-the-mediatek-bootrom/},
+  urldate = {2026-10-30},
+}
+
+@misc{checkm8-vu,
+  author = {{CERT Coordination Center}},
+  title = {{Boot ROM (SecureROM) Code Execution in Apple Devices (checkm8), CVE-2019-8900}},
+  howpublished = {{CERT/CC Vulnerability Note VU\#941987}},
+  year = {2019},
+  url = {https://kb.cert.org/vuls/id/941987/},
+  urldate = {2026-10-30},
+}
+
+@misc{ioactive-antifuse,
+  author = {Zonenberg, Andrew and others},
+  title = {{Extraction of Secrets from 40nm CMOS Gate Dielectric Breakdown Antifuses by FIB Passive Voltage Contrast}},
+  howpublished = {{USENIX WOOT 2025; arXiv:2501.13276}},
+  year = {2025},
+  url = {https://arxiv.org/abs/2501.13276},
+}
+
+@misc{opentitan-rom-patch,
+  author = {{OpenTitan}},
+  title = {{Boot ROM Patching}},
+  howpublished = {{OpenTitan Documentation}},
+  url = {https://opentitan.org/book/hw/top_earlgrey/ip_autogen/rv_core_ibex/doc/boot-rom-patching.html},
+  urldate = {2026-10-30},
+}
+
+@misc{aosp-device-state,
+  author = {{Android Open Source Project}},
+  title = {{Verified Boot: Device State}},
+  howpublished = {{Android Developers}},
+  url = {https://source.android.com/docs/security/features/verifiedboot/device-state},
+  urldate = {2026-10-30},
+}
+
+@misc{nist-hwb-spec,
+  author = {{National Institute of Standards and Technology}},
+  title = {{Hardware Write Blocker Device (HWB) Specification, Version 2.0}},
+  howpublished = {{NIST Computer Forensics Tool Testing (CFTT)}},
+  year = {2004},
+  url = {https://www.nist.gov/itl/ssd/cs/cftt/upload/hwb-posted.pdf},
+  urldate = {2026-10-31},
+}
+
+@inproceedings{halderman-coldboot,
+  author = {Halderman, J. Alex and others},
+  title = {{Lest We Remember: Cold Boot Attacks on Encryption Keys}},
+  booktitle = {{Proceedings of the 17th USENIX Security Symposium}},
+  publisher = {{USENIX Association}},
+  year = {2008},
+  url = {https://www.usenix.org/conference/17th-usenix-security-symposium/lest-we-remember-cold-boot-attacks-encryption-keys},
+  urldate = {2026-10-31},
+}
+
+@inproceedings{markettos-thunderclap,
+  author = {Markettos, A. Theodore and others},
+  title = {{Thunderclap: Exploring Vulnerabilities in Operating System IOMMU Protection via DMA from Untrustworthy Peripherals}},
+  booktitle = {{Proceedings of the 2019 Network and Distributed System Security Symposium (NDSS)}},
+  year = {2019},
+  url = {https://www.ndss-symposium.org/ndss-paper/thunderclap-exploring-vulnerabilities-in-operating-system-iommu-protection-via-dma-from-untrustworthy-peripherals/},
+  urldate = {2026-10-31},
+}
+
+@misc{frisk-pcileech,
+  author = {Frisk, Ulf},
+  title = {{PCILeech: Direct Memory Access (DMA) Attack Software}},
+  howpublished = {{Software, GitHub}},
+  url = {https://github.com/ufrisk/PCILeech},
+  urldate = {2026-10-31},
+}
+
+@inproceedings{muller-frost-coldboot,
+  author = {M\"uller, Tilo and Spreitzenbarth, Michael},
+  title = {{FROST: Forensic Recovery of Scrambled Telephones}},
+  booktitle = {{Applied Cryptography and Network Security (ACNS)}},
+  publisher = {{Springer}},
+  year = {2013},
+  doi = {10.1007/978-3-642-38980-1_23},
+}
+
+@misc{eset-lojax,
+  author = {{ESET Research}},
+  title = {{LoJax: First UEFI Rootkit Found in the Wild, Courtesy of the Sednit Group}},
+  howpublished = {{ESET, welivesecurity}},
+  url = {https://www.welivesecurity.com/2018/09/27/lojax-first-uefi-rootkit-found-wild-courtesy-sednit-group/},
+  year = {2018},
+  urldate = {2026-10-29},
+}
+
+@inproceedings{weinmann-baseband,
+  author = {Weinmann, Ralf-Philipp},
+  title = {{Baseband Attacks: Remote Exploitation of Memory Corruptions in Cellular Protocol Stacks}},
+  booktitle = {{Proceedings of the 6th USENIX Workshop on Offensive Technologies (WOOT)}},
+  pages = {12-21},
+  publisher = {{USENIX Association}},
+  year = {2012},
+  url = {https://www.usenix.org/conference/woot12/workshop-program/presentation/weinmann},
+  urldate = {2026-10-31},
+}
+
+@misc{ermolov-intel-me,
+  author = {Ermolov, Mark and Goryachy, Maxim},
+  title = {{How to Hack a Turned-Off Computer, or Running Unsigned Code in Intel Management Engine}},
+  howpublished = {{Black Hat Europe 2017, Positive Technologies (whitepaper)}},
+  url = {https://www.blackhat.com/docs/eu-17/materials/eu-17-Goryachy-How-To-Hack-A-Turned-Off-Computer-Or-Running-Unsigned-Code-In-Intel-Management-Engine-wp.pdf},
+  year = {2017},
+  urldate = {2026-10-30},
+}
+
+@inproceedings{jacob-faultpm,
+  author = {Jacob, Hans Niklas and Werling, Christian and Buhren, Robert and Seifert, Jean-Pierre},
+  title = {{faulTPM: Exposing AMD fTPMs' Deepest Secrets}},
+  booktitle = {{Proceedings of the 2023 IEEE 8th European Symposium on Security and Privacy (EuroS\&P)}},
+  pages = {1128-1142},
+  publisher = {{IEEE}},
+  year = {2023},
+  doi = {10.1109/EuroSP57164.2023.00069},
+}
+
+@misc{rfc9334-rats,
+  author = {Birkholz, H. and Thaler, D. and Richardson, M. and Smith, N. and Pan, W.},
+  title = {{RFC 9334: Remote ATtestation procedureS (RATS) Architecture}},
+  howpublished = {{Internet Engineering Task Force (IETF), Informational}},
+  year = {2023},
+  url = {https://www.rfc-editor.org/rfc/rfc9334.html},
+  urldate = {2026-10-30},
+}
+
+@article{coker-remote-attestation,
+  author = {Coker, George and Guttman, Joshua and Loscocco, Peter and Herzog, Amy and Millen, Jonathan and O'Hanlon, Brian and Ramsdell, John and Segall, Ariel and Sheehy, Justin and Sniffen, Brian},
+  title = {{Principles of Remote Attestation}},
+  journal = {{International Journal of Information Security}},
+  volume = {10},
+  number = {2},
+  pages = {63-81},
+  year = {2011},
+  doi = {10.1007/s10207-011-0124-7},
+}
+
+@misc{doctorow-general-computation,
+  author = {Doctorow, Cory},
+  title = {{Lockdown: The Coming War on General-Purpose Computing}},
+  howpublished = {{Boing Boing}},
+  year = {2012},
+  url = {https://boingboing.net/2012/01/10/lockdown.html},
+  urldate = {2026-10-30},
+}
+
+@misc{play-integrity-verdicts,
+  author = {{Android Developers}},
+  title = {{Play Integrity API: Integrity verdicts}},
+  url = {https://developer.android.com/google/play/integrity/verdicts},
+  urldate = {2026-10-30},
+}
+
+@misc{play-protect-certification,
+  author = {{Google Play Help}},
+  title = {{Check if your Android Device is Play Protect Certified}},
+  url = {https://support.google.com/googleplay/answer/7165974},
+  urldate = {2026-10-30},
+}
+
+@misc{rfc3227,
+  author = {Brezinski, D. and Killalea, T.},
+  title = {{Guidelines for Evidence Collection and Archiving}},
+  howpublished = {{IETF Best Current Practice 55, RFC 3227}},
+  year = {2002},
+  doi = {10.17487/RFC3227},
+  url = {https://www.rfc-editor.org/rfc/rfc3227.txt},
+  urldate = {2026-10-31},
+}
+
+@misc{magisk-install,
+  author = {{topjohnwu}},
+  title = {{Magisk Documentation: Installation}},
+  howpublished = {{Magisk Documentation}},
+  url = {https://topjohnwu.github.io/Magisk/install.html},
+  urldate = {2026-10-31},
+}
+
+@misc{magisk-details,
+  author = {{topjohnwu}},
+  title = {{Magisk Documentation: Internal Details}},
+  howpublished = {{Magisk Documentation}},
+  url = {https://topjohnwu.github.io/Magisk/details.html},
+  urldate = {2026-10-31},
+}
+
+@misc{magisk-ota,
+  author = {{topjohnwu}},
+  title = {{Magisk Documentation: OTA Upgrade Guides}},
+  howpublished = {{Magisk Documentation}},
+  url = {https://topjohnwu.github.io/Magisk/ota.html},
+  urldate = {2026-10-31},
+}
+
+@misc{aosp-partitions,
+  author = {{Android Open Source Project}},
+  title = {{Partitions overview}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/architecture/partitions},
+  urldate = {2026-10-31},
+}
+
+@misc{aosp-dm-verity,
+  author = {{Android Open Source Project}},
+  title = {{Implement dm-verity}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/security/features/verifiedboot/dm-verity},
+  urldate = {2026-10-31},
+}
+
+@misc{aosp-hal,
+  author = {{Android Open Source Project}},
+  title = {{Hardware abstraction layer (HAL) overview}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/architecture/hal},
+  urldate = {2026-10-31},
+}
+
+@misc{aosp-gki,
+  author = {{Android Open Source Project}},
+  title = {{Generic Kernel Image (GKI)}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/architecture/kernel/generic-kernel-image},
+  urldate = {2026-10-31},
+}
+
+@misc{playintegrityfork,
+  author = {{osm0sis}},
+  title = {{Play Integrity Fork}},
+  howpublished = {{GitHub repository}},
+  url = {https://github.com/osm0sis/PlayIntegrityFork},
+  urldate = {2026-10-31},
+}
+
+@misc{microg-gmscore,
+  author = {{microG Project}},
+  title = {{GmsCore}},
+  howpublished = {{microG GmsCore wiki}},
+  url = {https://github.com/microg/GmsCore/wiki},
+  urldate = {2026-10-31},
+}
+
+@misc{calyxos-microg,
+  author = {{CalyxOS}},
+  title = {{microG}},
+  howpublished = {{CalyxOS Documentation}},
+  url = {https://calyxos.org/docs/guide/microg/},
+  urldate = {2026-10-31},
+}
+
+@misc{calyxos-banking,
+  author = {{CalyxOS}},
+  title = {{Banking or payment app compatibility on CalyxOS}},
+  howpublished = {{CalyxOS Help}},
+  url = {https://calyx.org/help/phones/calyxos-banking-app-compatibility},
+  urldate = {2026-10-31},
+}
+
+@misc{eos-microg,
+  author = {{e Foundation}},
+  title = {{microG}},
+  howpublished = {{/e/OS Documentation}},
+  url = {https://doc.e.foundation/os/apps/microg/},
+  urldate = {2026-10-31},
+}
+
+@misc{safetynet-fix,
+  author = {{kdrag0n}},
+  title = {{Universal SafetyNet Fix}},
+  howpublished = {{GitHub repository}},
+  url = {https://github.com/kdrag0n/safetynet-fix},
+  urldate = {2026-10-31},
+}
+
+@misc{tricky-store,
+  author = {{5ec1cff}},
+  title = {{Tricky Store}},
+  howpublished = {{GitHub repository}},
+  url = {https://github.com/5ec1cff/TrickyStore},
+  urldate = {2026-10-31},
+}
+
+@misc{eckersley-carrieriq,
+  author = {Eckersley, Peter},
+  title = {{Some Facts About Carrier IQ}},
+  howpublished = {{Electronic Frontier Foundation, Deeplinks blog}},
+  year = {2011},
+  month = dec,
+  url = {https://www.eff.org/deeplinks/2011/12/carrier-iq-architecture},
+  urldate = {2026-11-01},
+}
+
+@misc{aosp-drm,
+  author = {{Android Open Source Project}},
+  title = {{DRM}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/media/drm},
+  urldate = {2026-11-01},
+}
+
+@techreport{liu-android-oem-snooping,
+  author = {Liu, Haoyu and Patras, Paul and Leith, Douglas J.},
+  title = {{Android Mobile OS Snooping By Samsung, Xiaomi, Huawei and Realme Handsets}},
+  institution = {{University of Edinburgh and Trinity College Dublin}},
+  year = {2021},
+  month = oct,
+  note = {{Technical report, 6 October 2021; not peer reviewed. Peer-reviewed version: On the data privacy practices of Android OEMs, PLOS ONE 18(1), 2023, doi:10.1371/journal.pone.0279942}},
+  url = {https://www.scss.tcd.ie/Doug.Leith/Android_privacy_report.pdf},
+  urldate = {2026-11-01},
+}
+
+@misc{replicant-samsung-backdoor,
+  author = {Kocialkowski, Paul},
+  title = {{Replicant Developers Find and Close Samsung Galaxy Backdoor}},
+  howpublished = {{Free Software Foundation, Community blog}},
+  year = {2014},
+  month = mar,
+  url = {https://www.fsf.org/blogs/community/replicant-developers-find-and-close-samsung-galaxy-backdoor},
+  urldate = {2026-11-01},
+}
+
+@misc{projectzero-badbinder,
+  author = {Stone, Maddie and Horn, Jann},
+  title = {{Bad Binder: Android In-The-Wild Exploit}},
+  howpublished = {{Google Project Zero blog}},
+  year = {2019},
+  month = nov,
+  url = {https://googleprojectzero.blogspot.com/2019/11/bad-binder-android-in-wild-exploit.html},
+  urldate = {2026-11-01},
+}
+
+@misc{aosp-fastboot-protocol,
+  author = {{Android Open Source Project}},
+  title = {{Fastboot: the fastboot protocol}},
+  howpublished = {{platform/system/core, Android source tree}},
+  url = {https://android.googlesource.com/platform/system/core/+/refs/heads/main/fastboot/README.md},
+  urldate = {2026-11-01},
+}
+
+@misc{avcomparatives-mobile-2024,
+  author = {{AV-Comparatives}},
+  title = {{Mobile Security Review 2024}},
+  howpublished = {{AV-Comparatives independent test report}},
+  url = {https://www.av-comparatives.org/wp-content/uploads/2024/06/avc_mob_2024.pdf},
+  urldate = {2026-11-01},
+  note = {Independent AV testing lab; test period May 2024. Not peer-reviewed.},
+}
+
+@misc{avtest-android-endurance-2018,
+  author = {{AV-TEST}},
+  title = {{16 Android Security Apps vs. Google Play Protect in an Endurance Test}},
+  howpublished = {{AV-TEST Institute}},
+  url = {https://www.av-test.org/en/news/16-android-security-apps-vs-google-play-protect-in-an-endurance-test/},
+  urldate = {2026-11-01},
+  note = {Independent AV testing lab; endurance test November 2017 to March 2018. Not peer-reviewed.},
+}
+
+@misc{eu-computer-programs-directive,
+  title = {{Directive 2009/24/EC of the European Parliament and of the Council of 23 April 2009 on the legal protection of computer programs (Codified version)}},
+  howpublished = {{Official Journal of the European Union, L 111, pp. 16-22}},
+  year = {2009},
+  month = apr,
+  url = {https://eur-lex.europa.eu/eli/dir/2009/24/oj},
+  urldate = {2026-11-01},
+}
+
+@misc{replicant-samsung-backdoor-wiki,
+  author = {{Replicant Project}},
+  title = {{Samsung Galaxy Back-door}},
+  howpublished = {{Replicant wiki, technical analysis}},
+  url = {https://redmine.replicant.us/projects/replicant/wiki/SamsungGalaxyBackdoor},
+  urldate = {2026-11-01},
+}
+
+@misc{google-play-protect-remove,
+  author = {{Google}},
+  title = {{Play Protect: On-device Protections}},
+  howpublished = {{Android Developers documentation}},
+  url = {https://developers.google.com/android/play-protect/client-protections},
+  urldate = {2026-11-01},
+}
+
+@inproceedings{li-basemirror,
+  author = {Li, Wenqiang and Wen, Haohuang and Lin, Zhiqiang},
+  title = {{BaseMirror: Automatic Reverse Engineering of Baseband Commands from Android's Radio Interface Layer}},
+  booktitle = {{Proceedings of the 2024 ACM SIGSAC Conference on Computer and Communications Security (CCS '24)}},
+  publisher = {{ACM}},
+  year = {2024},
+  doi = {10.1145/3658644.3690254},
+  url = {https://arxiv.org/abs/2409.00475},
+  urldate = {2026-11-01},
+}
+
+@misc{google-verify-account,
+  author = {{Google}},
+  title = {{Verify your account}},
+  howpublished = {{Google Account Help}},
+  url = {https://support.google.com/accounts/answer/114129},
+  urldate = {2026-11-03},
+}
+
+@article{donovan-sim-registration,
+  author = {Donovan, Kevin P. and Martin, Aaron K.},
+  title = {{The rise of African SIM registration: The emerging dynamics of regulatory change}},
+  journal = {{First Monday}},
+  volume = {19},
+  number = {2},
+  year = {2014},
+  doi = {10.5210/fm.v19i2.4351},
+  url = {https://firstmonday.org/ojs/index.php/fm/article/view/4351},
+  urldate = {2026-11-03},
+}
+
+@techreport{schmidt-google-data-collection,
+  author = {Schmidt, Douglas C.},
+  title = {{Google Data Collection}},
+  institution = {{Digital Content Next (research conducted at Vanderbilt University)}},
+  year = {2018},
+  month = aug,
+  url = {https://digitalcontentnext.org/wp-content/uploads/2018/08/DCN-Google-Data-Collection-Paper.pdf},
+  urldate = {2026-11-03},
+}
+
+@misc{eu-data-retention-directive,
+  author = {{European Parliament and Council of the European Union}},
+  title = {{Directive 2006/24/EC on the retention of data generated or processed in connection with the provision of publicly available electronic communications services or of public communications networks}},
+  howpublished = {{Official Journal of the European Union, L 105/54; EUR-Lex CELEX 32006L0024}},
+  year = {2006},
+  url = {https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32006L0024},
+  urldate = {2026-11-03},
+}
+
+@inproceedings{patat-widevine,
+  author = {Patat, Gwendal and Sabt, Mohamed and Fouque, Pierre-Alain},
+  title = {{Exploring Widevine for Fun and Profit}},
+  booktitle = {{Proc. IEEE Security and Privacy Workshops (SPW), Workshop on Offensive Technologies (WOOT)}},
+  address = {San Francisco, CA, USA},
+  pages = {277--288},
+  year = {2022},
+  doi = {10.1109/SPW54247.2022.9833867},
+  url = {https://arxiv.org/abs/2204.09298},
+  urldate = {2026-11-03},
+}
+
+@inproceedings{rafi-drm-mobile,
+  author = {Rafi, Amir and Shepherd, Carlton and Markantonakis, Konstantinos},
+  title = {{A First Look at Digital Rights Management Systems for Secure Mobile Content Delivery}},
+  booktitle = {{Proc. IEEE 22nd Int. Conf. on Trust, Security and Privacy in Computing and Communications (TrustCom)}},
+  address = {Exeter, UK},
+  pages = {549--558},
+  year = {2023},
+  doi = {10.1109/TrustCom60117.2023.00087},
+  url = {https://arxiv.org/abs/2308.00437},
+  urldate = {2026-11-03},
+}
+
+@misc{magisk-guides,
+  author = {{topjohnwu}},
+  title = {{Magisk Documentation: Developer Guides}},
+  howpublished = {{Magisk Documentation}},
+  url = {https://topjohnwu.github.io/Magisk/guides.html},
+  urldate = {2026-11-03},
+}
+
+@misc{kernelsu-modules,
+  author = {{KernelSU project}},
+  title = {{KernelSU Documentation: Module Guide}},
+  howpublished = {{KernelSU Documentation}},
+  url = {https://kernelsu.org/guide/module.html},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-avb-readme,
+  author = {{Android Open Source Project}},
+  title = {{Android Verified Boot 2.0}},
+  howpublished = {{Android Open Source Project, platform/external/avb README}},
+  url = {https://android.googlesource.com/platform/external/avb/+/master/README.md},
+  urldate = {2026-11-03},
+}
+
+@inproceedings{sun-android-rooting,
+  author = {Sun, San-Tsai and Cuadros, Andrea and Beznosov, Konstantin},
+  title = {{Android Rooting: Methods, Detection, and Evasion}},
+  booktitle = {{Proc. 5th Annual ACM CCS Workshop on Security and Privacy in Smartphones and Mobile Devices (SPSM)}},
+  pages = {3--14},
+  year = {2015},
+  doi = {10.1145/2808117.2808126},
+}
+
+@misc{adaway,
+  author = {{AdAway project}},
+  title = {{AdAway: open-source ad blocker for Android using the hosts file (systemless via Magisk)}},
+  howpublished = {{Software project}},
+  url = {https://github.com/AdAway/AdAway},
+  urldate = {2026-11-03},
+}
+
+@misc{afwall,
+  author = {{AFWall+ project}},
+  title = {{AFWall+ (Android Firewall+): iptables-based firewall requiring root}},
+  howpublished = {{Software project}},
+  url = {https://github.com/ukanth/afwall},
+  urldate = {2026-11-03},
+}
+
+@misc{universal-android-debloater,
+  author = {{Universal Debloater Alliance}},
+  title = {{Universal Android Debloater Next Generation: remove system apps over ADB via pm uninstall --user 0}},
+  howpublished = {{Software project}},
+  url = {https://github.com/Universal-Debloater-Alliance/universal-android-debloater-next-generation},
+  urldate = {2026-11-03},
+}
+
+@misc{lsposed,
+  author = {{LSPosed project}},
+  title = {{LSPosed: a Zygisk-based framework for hooking the Android framework (Xposed API)}},
+  howpublished = {{Software project}},
+  url = {https://github.com/LSPosed/LSPosed},
+  urldate = {2026-11-03},
+}
+
+@misc{kernel-dm-verity,
+  author = {{The Linux Kernel}},
+  title = {{dm-verity}},
+  howpublished = {{The Linux Kernel documentation}},
+  url = {https://docs.kernel.org/admin-guide/device-mapper/verity.html},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-dynamic-partitions,
+  author = {{Android Open Source Project}},
+  title = {{Implement dynamic partitions}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/ota/dynamic_partitions/implement},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-set-verity-service,
+  author = {{Android Open Source Project}},
+  title = {{adb: verity enable/disable service, compiled out and refused on user builds}},
+  howpublished = {{AOSP source tree, platform/packages/modules/adb, commit ca205c96}},
+  url = {https://android.googlesource.com/platform/packages/modules/adb/+/ca205c96/set_verity_enable_state_service.cpp},
+  urldate = {2026-11-03},
+}
+
+@misc{kernel-erofs,
+  author = {{The Linux Kernel}},
+  title = {{EROFS - Enhanced Read-Only File System}},
+  howpublished = {{The Linux Kernel documentation}},
+  url = {https://docs.kernel.org/filesystems/erofs.html},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-erofs,
+  author = {{Android Open Source Project}},
+  title = {{Enable EROFS}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/architecture/kernel/erofs},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-shell-manifest,
+  author = {{Android Open Source Project}},
+  title = {{com.android.shell manifest: the shell UID holds DELETE\_PACKAGES and CHANGE\_COMPONENT\_ENABLED\_STATE}},
+  howpublished = {{AOSP source tree, platform/frameworks/base, branch main}},
+  url = {https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/packages/Shell/AndroidManifest.xml},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-packagemanager-flags,
+  author = {{Android Open Source Project}},
+  title = {{PackageManager.DELETE\_SYSTEM\_APP: mark a system app uninstalled for the current user}},
+  howpublished = {{AOSP source tree, platform/frameworks/base, branch main}},
+  url = {https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/java/android/content/pm/PackageManager.java},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-vpnservice,
+  author = {{Android Developers}},
+  title = {{VpnService}},
+  howpublished = {{Android Developers reference, android.net.VpnService}},
+  url = {https://developer.android.com/reference/android/net/VpnService},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-vpn-guide,
+  author = {{Android Developers}},
+  title = {{Create a VPN client}},
+  howpublished = {{Android Developers}},
+  url = {https://developer.android.com/develop/connectivity/vpn},
+  urldate = {2026-11-03},
+}
+
+@misc{netfilter,
+  author = {{The netfilter.org project}},
+  title = {{netfilter/iptables project homepage}},
+  howpublished = {{netfilter/iptables project}},
+  url = {https://www.netfilter.org/},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-kernel,
+  author = {{Android Open Source Project}},
+  title = {{Android kernel overview}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/architecture/kernel},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-zygote,
+  author = {{Android Open Source Project}},
+  title = {{About the Zygote processes}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/core/runtime/zygote},
+  urldate = {2026-11-03},
+}
+
+@misc{frida,
+  author = {{Frida project}},
+  title = {{Frida: a dynamic instrumentation toolkit}},
+  howpublished = {{Software project documentation}},
+  url = {https://frida.re/docs/home/},
+  urldate = {2026-11-03},
+}
+
+@misc{linux-capabilities,
+  author = {{Linux man-pages project}},
+  title = {{capabilities(7): overview of Linux capabilities}},
+  howpublished = {{Linux manual page}},
+  url = {https://man7.org/linux/man-pages/man7/capabilities.7.html},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-build-variants,
+  author = {{Android Open Source Project}},
+  title = {{Build Android}},
+  howpublished = {{Android Open Source Project documentation}},
+  url = {https://source.android.com/docs/setup/build/building},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-sysprop-config,
+  author = {{Android Open Source Project}},
+  title = {{core/sysprop\_config.mk: ro.secure and ro.debuggable set per build variant}},
+  howpublished = {{AOSP source tree, platform/build, commit 2867f02a3a}},
+  url = {https://android.googlesource.com/platform/build/+/2867f02a3a/core/sysprop_config.mk},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-adbd-main,
+  author = {{Android Open Source Project}},
+  title = {{adbd daemon main: should\_drop\_privileges, adb root gated on ro.debuggable}},
+  howpublished = {{AOSP source tree, platform/packages/modules/adb, main branch}},
+  url = {https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/daemon/main.cpp},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-su,
+  author = {{Android Open Source Project}},
+  title = {{system/extras su: callable only by the root and shell UIDs}},
+  howpublished = {{AOSP source tree, platform/system/extras, main branch}},
+  url = {https://android.googlesource.com/platform/system/extras/+/refs/heads/main/su/su.cpp},
+  urldate = {2026-11-03},
+}
+
+@misc{aosp-sepolicy-su-te,
+  author = {{Android Open Source Project}},
+  title = {{SELinux policy su.te: permissive su domain compiled in only under userdebug\_or\_eng}},
+  howpublished = {{AOSP source tree, platform/system/sepolicy, main branch}},
+  url = {https://android.googlesource.com/platform/system/sepolicy/+/refs/heads/main/private/su.te},
+  urldate = {2026-11-03},
+}
+
+@misc{uefi-secure-boot,
+  author = {{UEFI Forum}},
+  title = {{Unified Extensible Firmware Interface (UEFI) Specification, Version 2.10, Chapter 32 (Secure Boot and Driver Signing), Section 32.6 (UEFI Image Validation)}},
+  howpublished = {{UEFI Forum}},
+  url = {https://uefi.org/specs/UEFI/2.10/32_Secure_Boot_and_Driver_Signing.html},
+  urldate = {2026-11-03},
+}
+
+@misc{ms-secure-boot,
+  author = {{Microsoft}},
+  title = {{Secure Boot}},
+  howpublished = {{Microsoft Learn, Windows Hardware Developer documentation}},
+  url = {https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-secure-boot},
+  urldate = {2026-11-06},
+}
+
+@misc{chromeos-verified-boot,
+  author = {{The Chromium Projects}},
+  title = {{Verified Boot}},
+  howpublished = {{Chromium OS design documents}},
+  url = {https://www.chromium.org/chromium-os/chromiumos-design-docs/verified-boot/},
+  urldate = {2026-11-06},
+}

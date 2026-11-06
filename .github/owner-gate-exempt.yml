@@ -1,0 +1,2 @@
+owner-gate-exempt:
+  .github/workflows/build-image.yml:build: "Pushes the pinned toolchain image to GHCR, which needs a workflow GITHUB_TOKEN with packages:write; gating on the normally-unset CI_ENABLED_ORG_AI_ASSISTED var would stop it ever producing the image. Runs only on manual dispatch or a docker/Dockerfile change, and this workflow exists only in this source repo (no fork/mirror runs it)."

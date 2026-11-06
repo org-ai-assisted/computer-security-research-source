@@ -1,0 +1,46 @@
+# AI-Assisted.
+# Build the pinned CSR toolchain image and push it to the PUBLIC GHCR package.
+# Both bin/csr-build (local) and pages.yml (deploy) pull this ONE image by the
+# @sha256 digest recorded in docker/image.ref, so their PDF/docx bytes match
+# bit-for-bit. Re-run on a deliberate toolchain bump (edit docker/Dockerfile),
+# then copy the printed digest into docker/image.ref (its own commit) -- that
+# re-mints the committed .sha512 on the next csr-build run.
+
+name: build-image
+
+"on":
+  workflow_dispatch:
+  push:
+    branches: [master, main]
+    paths:
+      - docker/Dockerfile
+      - .github/workflows/build-image.yml
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: build-image
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # NOT gated on CI_ENABLED_ORG_AI_ASSISTED: the GHCR image can only be pushed
+    # from a workflow GITHUB_TOKEN (packages:write), and this runs rarely (manual
+    # dispatch or a Dockerfile change), so gating it on the normally-unset CI var
+    # would stop it ever producing the image. Only ever present in the source repo.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Build and push toolchain image to GHCR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_ACTOR: ${{ github.actor }}
+          OWNER: ${{ github.repository_owner }}
+        run: bash docker/build-and-push-image.sh

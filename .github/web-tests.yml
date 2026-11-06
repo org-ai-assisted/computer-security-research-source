@@ -1,0 +1,5 @@
+# Declarative policy selector for the dist-ai webcheck suite (dist_ai.webcheck).
+# This is a standalone CSR site (not a family Pages site, not a wiki), so it
+# is checked under the `csr` policy. The generator copies this file into the
+# built _site/.github/ so check_site reads it there.
+policies: [csr]

@@ -1,0 +1,34 @@
+# Site-level configuration. Read by tools/generate.py. ASCII only.
+
+title = "Computer Security Research"
+# Canonical base URL. Org GitHub Pages site serves at the host root.
+# Page/PDF URLs are derived from this.
+base_url = "https://computer-security-research.github.io"
+publisher = "Computer Security Research"
+# Default license applied to pages that do not override it.
+license = "All rights reserved"
+license_url = ""
+language = "en"
+
+# Repo blob root for the "Markdown source" links on each article + its sources
+# page (-> <base>/articles/<slug>/{paper,source-quotes}.md). The public Pages-home
+# repo: permanent + vendor-neutral (never the interim org-ai-assisted mirror,
+# which the served-content gate forbids and which will break on the org move).
+source_base_url = "https://github.com/computer-security-research/computer-security-research.github.io/blob/master"
+
+# Consistent footer navigation, rendered identically on every page (relative
+# hrefs are resolved from each page's depth). Vendor-neutral and standalone.
+footer_links = [
+  { title = "Home", href = "./" },
+  { title = "About", href = "about/" },
+  { title = "License", href = "license/" },
+  { title = "RSS", href = "feed.xml" },
+]
+
+# Per-page vendor-mention allowlist (page slug -> exact phrases), applied ONLY to
+# that page. The About page's contact address is an accepted exception; article
+# allowances live per-article in each article's meta.toml. A [table] header must
+# be LAST in this file -- TOML scopes any following bare keys into it.
+[page_allow_vendor_mentions]
+about = ["adrelanos@kicksecure.com"]
+license = ["adrelanos@kicksecure.com"]

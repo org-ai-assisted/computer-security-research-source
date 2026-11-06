@@ -1,0 +1,34 @@
+# Bibliographic metadata for this article.
+# Title and abstract are parsed from paper.md (single source of truth).
+# ASCII only.
+
+# TODO(review): confirm authorship and affiliation before publishing.
+authors = [
+  { name = "Patrick Schleizer" },
+]
+
+date = "2026-10-24"
+online_date = "2026-10-24"
+language = "en"
+keywords = [
+  "owner-inspectability",
+  "Android security",
+  "independent verification",
+  "mobile forensics",
+  "remote attestation",
+  "rootkit detection",
+  "malware analysis",
+  "device integrity",
+]
+
+# Filled after Zenodo minting. Empty => citation_doi tag omitted (no placeholder).
+doi = ""
+
+license = "All rights reserved"
+
+# draft | published | corrected. Draft while DOIs (see paper.md TODO markers) are
+# unresolved; promoting to "published" turns on the no-TODO release-state gate.
+status = "draft"
+
+# Standard scholarly statements (rendered only when present; honest for this work).
+data_availability = "This is an analysis paper. It introduces no new datasets or code; all sources are cited and publicly available at the URLs listed in the references."
