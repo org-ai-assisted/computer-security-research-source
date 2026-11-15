@@ -274,6 +274,11 @@ setup_artifacts_stub() {
    git -C "${stub_artifacts}" commit --quiet --message init
    git -C "${stub_artifacts}" push --quiet computer-security-research master
    git -C "${stub_artifacts}" push --quiet org-ai-assisted master
+   ## A tag named 'master' makes the name AMBIGUOUS: `symbolic-ref --short` would then print
+   ## 'heads/master' (failing the HEAD check) and a bare `git push <remote> master` source refspec
+   ## would be rejected. The publish path (branch check + push below) must use the FULL ref and
+   ## still publish. This fixture makes the F/G publish flow exercise exactly that.
+   git -C "${stub_artifacts}" tag master
 }
 setup_artifacts_stub
 

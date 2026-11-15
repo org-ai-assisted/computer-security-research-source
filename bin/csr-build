@@ -201,7 +201,8 @@ fi
 
 cd -- "${artifacts_dir}"
 
-## The artifacts repo is direct-to-master (the push below is `git push <remote> master`, and the
+## The artifacts repo is direct-to-master (the push below is `git push <remote>
+## refs/heads/master:refs/heads/master`, and the
 ## confirm keys on HEAD). Refuse on any other branch: a commit to a non-master HEAD would never be
 ## the pushed `master` tip, so the confirm would wait out its whole timeout on an unpushed sha.
 ## Compare the FULL ref, not `--short`: when `master` is ambiguous (e.g. a tag named `master`
@@ -237,7 +238,9 @@ MSG
 ## deploy-home remote IS the Pages deploy.
 for remote in "${artifacts_remotes[@]}"; do
    printf '%s\n' "csr-build: pushing ${remote} master ..."
-   git push "${remote}" master
+   ## Fully-qualified src:dst -- a bare `master` source refspec is AMBIGUOUS when a tag named
+   ## `master` also exists (git rejects it), the same ambiguity the HEAD check above avoids.
+   git push "${remote}" refs/heads/master:refs/heads/master
 done
 printf '%s\n' "csr-build: committed + pushed to: ${artifacts_remotes[*]}"
 
