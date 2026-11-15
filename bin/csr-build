@@ -215,6 +215,8 @@ printf '%s\n' "csr-build: committed + pushed to: ${artifacts_remotes[*]}"
 ## the sha), FAILING LOUD otherwise. The deploy-home is the FIRST artifacts remote (only it hosts
 ## Pages; the mirror does not).
 pushed_sha="$(git -C "${artifacts_dir}" rev-parse HEAD)"
-deploy_home_url="$(git -C "${artifacts_dir}" remote get-url "${artifacts_remotes[0]}")"
-deploy_home_owner_repo="$(printf '%s' "${deploy_home_url}" | sed -E 's#^.*github\.com[:/]+##; s#\.git$##')"
-"${pages_confirm_published}" "${deploy_home_owner_repo}" "${pushed_sha}"
+## --push: confirm the repo we PUSHED to, not the fetch URL (they differ when a push URL is set).
+## Hand the URL straight to pages-confirm-published; it derives owner/repo via the shared dist-ai
+## lib, so the URL->owner/repo parse lives in ONE place (credential-stripping, port, ssh-over-443).
+deploy_home_url="$(git -C "${artifacts_dir}" remote get-url --push "${artifacts_remotes[0]}")"
+"${pages_confirm_published}" "${deploy_home_url}" "${pushed_sha}"
