@@ -246,10 +246,12 @@ exit 0
 SANDBOX
 chmod +x -- "${fakebin}/sandbox"
 
-mkdir --parents -- "${stub_jm}/usr/bin" "${stub_dist}/usr/share/website-tests"
+mkdir --parents -- "${stub_jm}/usr/bin" "${stub_dist}/usr/bin" "${stub_dist}/usr/share/website-tests"
 make_exit0_stub "${stub_jm}/usr/bin/journal-maker"
 make_exit0_stub "${stub_dist}/usr/share/website-tests/check_site.py"
 make_exit0_stub "${stub_dist}/usr/share/website-tests/check_svg_safety.py"
+## The publish path asserts (and, on a real publish, runs) dist-ai's live-deploy confirm helper.
+make_exit0_stub "${stub_dist}/usr/bin/pages-confirm-published"
 
 ## artifacts repo stub: a git repo on master with _site/, hooks disabled, and two
 ## LOCAL bare remotes named like the real deploy home + mirror so the publish

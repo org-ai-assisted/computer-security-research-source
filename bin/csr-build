@@ -48,6 +48,12 @@ check_site="${dist_ai}/usr/share/website-tests/check_site.py"
 check_svg_safety="${dist_ai}/usr/share/website-tests/check_svg_safety.py"
 pages_confirm_published="${dist_ai}/usr/bin/pages-confirm-published"
 read -r -a artifacts_remotes <<< "${CSR_ARTIFACTS_REMOTES:-computer-security-research org-ai-assisted}"
+## A whitespace-only CSR_ARTIFACTS_REMOTES bypasses the :- default yet parses to ZERO words, which
+## would silently push nothing AND crash the confirm's ${artifacts_remotes[0]} under nounset.
+if [ "${#artifacts_remotes[@]}" -eq 0 ]; then
+   printf '%s\n' "csr-build: CSR_ARTIFACTS_REMOTES is empty -- set at least one artifacts remote" >&2
+   exit 1
+fi
 
 ## Dirty RENDER INPUTS -- the working-tree source paths the build turns into
 ## _site: articles/ (incl. per-article refs.bib/source-quotes.toml), pages/,
@@ -111,9 +117,15 @@ if [ ! -x "${check_svg_safety}" ]; then
    printf '%s\n' "csr-build: dist-ai check_svg_safety not found at ${check_svg_safety} (set CSR_DIST_AI)" >&2
    exit 1
 fi
-if [ ! -x "${pages_confirm_published}" ]; then
-   printf '%s\n' "csr-build: dist-ai pages-confirm-published not found at ${pages_confirm_published} (set CSR_DIST_AI)" >&2
-   exit 1
+## Only the PUBLISH path confirms the live deploy, so --no-commit preview does NOT need the helper
+## (nor dist-ai's deploy tooling). Canonicalize to an ABSOLUTE path here: the confirm runs after a
+## `cd` into the artifacts repo, where a relative CSR_DIST_AI would no longer resolve.
+if [ "${do_commit}" -eq 1 ]; then
+   if [ ! -x "${pages_confirm_published}" ]; then
+      printf '%s\n' "csr-build: dist-ai pages-confirm-published not found at ${pages_confirm_published} (set CSR_DIST_AI)" >&2
+      exit 1
+   fi
+   pages_confirm_published="$(readlink --canonicalize -- "${pages_confirm_published}")"
 fi
 
 ## Build into a staging dir OUTSIDE the content tree: the sandbox refuses to
@@ -181,6 +193,15 @@ fi
 
 cd -- "${artifacts_dir}"
 
+## The artifacts repo is direct-to-master (the push below is `git push <remote> master`, and the
+## confirm keys on HEAD). Refuse on any other branch: a commit to a non-master HEAD would never be
+## the pushed `master` tip, so the confirm would wait out its whole timeout on an unpushed sha.
+artifacts_branch="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
+if [ "${artifacts_branch}" != 'master' ]; then
+   printf '%s\n' "csr-build: artifacts repo is on '${artifacts_branch}', not master -- refusing to publish" >&2
+   exit 1
+fi
+
 ## Stage the generated tree. .gitignore excludes the binaries (*.pdf/*.docx), so
 ## only the cheap text (HTML/.tex/assets) + the .sha512 checksum sidecars are
 ## staged -- never a binary.
@@ -214,9 +235,11 @@ printf '%s\n' "csr-build: committed + pushed to: ${artifacts_remotes[*]}"
 ## this commit via dist-ai's pages-confirm-published (which keys on the github-pages DEPLOYMENT for
 ## the sha), FAILING LOUD otherwise. The deploy-home is the FIRST artifacts remote (only it hosts
 ## Pages; the mirror does not).
-pushed_sha="$(git -C "${artifacts_dir}" rev-parse HEAD)"
+## cwd is the artifacts repo (cd above), so no `git -C` -- a relative CSR_ARTIFACTS would otherwise
+## double-resolve against the new cwd.
+pushed_sha="$(git rev-parse HEAD)"
 ## --push: confirm the repo we PUSHED to, not the fetch URL (they differ when a push URL is set).
 ## Hand the URL straight to pages-confirm-published; it derives owner/repo via the shared dist-ai
 ## lib, so the URL->owner/repo parse lives in ONE place (credential-stripping, port, ssh-over-443).
-deploy_home_url="$(git -C "${artifacts_dir}" remote get-url --push "${artifacts_remotes[0]}")"
+deploy_home_url="$(git remote get-url --push "${artifacts_remotes[0]}")"
 "${pages_confirm_published}" "${deploy_home_url}" "${pushed_sha}"
