@@ -331,6 +331,125 @@ if ! contains "${build_out}" "${pushed_msg}"; then
 fi
 safe-rm --recursive --force -- "${fixture_g}"
 safe-rm --force -- "${stripped}"
+
+## P/Q. A RELATIVE CSR_ARTIFACTS must publish to the repo the build RSYNCED into, even with CDPATH
+## set. Without up-front absolutization, `cd -- <rel>` honors CDPATH and lands in a DIFFERENT repo
+## than rsync wrote to (rsync ignores CDPATH), so csr-build commits/pushes/confirms the wrong tree.
+## P drives the current code: the REAL repo (the rsync target) is published, the decoy is untouched.
+## Q is the CANARY: strip the absolutization and the SAME input operates on the CDPATH decoy (which
+## has nothing new to stage), so it prints "nothing to publish" and the real repo is never published.
+
+## Clean sandbox stub: builds _site WITHOUT dirtying a source (so the publish path is reached).
+clean_fakebin="$(mktemp --directory)"
+cat > "${clean_fakebin}/sandbox" <<'SANDBOX'
+#!/bin/bash
+set -o errexit -o nounset -o pipefail
+sub=""
+pull=""
+while [ "$#" -gt 0 ]; do
+   case "$1" in
+      exec|run) sub="$1"; shift ;;
+      --pull) pull="$2"; shift 2 ;;
+      --workdir) shift 2 ;;
+      --) shift; break ;;
+      *) shift ;;
+   esac
+done
+if [ "${sub}" = "run" ]; then
+   mkdir --parents -- "${pull}/_site"
+   printf '%s\n' '<html>BUILT</html>' > "${pull}/_site/index.html"
+fi
+exit 0
+SANDBOX
+chmod +x -- "${clean_fakebin}/sandbox"
+
+make_pub_repo() {
+   ## $1 worktree dir (created), $2 bare remote dir (created). Master, hooks off, seeded _site.
+   git init --quiet --bare "$2"
+   mkdir --parents -- "$1/_site"
+   git -C "$1" init --quiet --initial-branch=master
+   git -C "$1" config core.hooksPath /dev/null
+   git -C "$1" config user.email test@example.invalid
+   git -C "$1" config user.name "csr test"
+   git -C "$1" remote add computer-security-research "$2"
+   printf '%s\n' '<html>seed</html>' > "$1/_site/seed.html"
+   git -C "$1" add --all
+   git -C "$1" -c core.hooksPath=/dev/null commit --quiet --message init
+   git -C "$1" push --quiet computer-security-research master
+}
+
+run_build_rel() {
+   ## $1 csr-build path. cwd is the REAL base, CSR_ARTIFACTS is the RELATIVE 'pub', and CDPATH points
+   ## at the decoy base (which also has a 'pub'). Single remote keeps the push simple.
+   local fixture="$1"
+   build_rc=0
+   build_out="$(
+      cd -- "${rel_real_base}" \
+      && PATH="${clean_fakebin}:${PATH}" \
+         HOME="${tmp_home}" \
+         CDPATH="${rel_decoy_base}" \
+         CSR_JOURNAL_MAKER="${stub_jm}" \
+         CSR_DIST_AI="${stub_dist}" \
+         CSR_ARTIFACTS='pub' \
+         CSR_ARTIFACTS_REMOTES='computer-security-research' \
+         "${fixture}/bin/csr-build" 2>&1
+   )" || build_rc=$?
+}
+
+setup_rel_fixtures() {
+   rel_real_base="$(mktemp --directory)"
+   rel_decoy_base="$(mktemp --directory)"
+   make_pub_repo "${rel_real_base}/pub" "${rel_real_base}/bare.git"
+   make_pub_repo "${rel_decoy_base}/pub" "${rel_decoy_base}/bare.git"
+   rel_real_init="$(git -C "${rel_real_base}/pub" rev-parse HEAD)"
+   rel_decoy_init="$(git -C "${rel_decoy_base}/pub" rev-parse HEAD)"
+}
+
+## P. current code -> the REAL (rsync-target) repo is published; the decoy stays put.
+setup_rel_fixtures
+fixture_p="$(make_fixture)"
+run_build_rel "${fixture_p}"
+rel_real_head="$(git -C "${rel_real_base}/pub" rev-parse HEAD)"
+rel_decoy_head="$(git -C "${rel_decoy_base}/pub" rev-parse HEAD)"
+if ! contains "${build_out}" "${pushed_msg}"; then
+   printf '%s\n' "FAIL: P: relative CSR_ARTIFACTS -- expected a publish, got: ${build_out}" >&2
+   fails=$((fails + 1))
+fi
+if [ "${rel_real_head}" = "${rel_real_init}" ]; then
+   printf '%s\n' "FAIL: P: the real (rsync-target) repo was not published, got: ${build_out}" >&2
+   fails=$((fails + 1))
+fi
+if [ "${rel_decoy_head}" != "${rel_decoy_init}" ]; then
+   printf '%s\n' "FAIL: P: the CDPATH decoy repo was published (wrong target)" >&2
+   fails=$((fails + 1))
+fi
+safe-rm --recursive --force -- "${fixture_p}" "${rel_real_base}" "${rel_decoy_base}"
+
+## Q. CANARY: strip the absolutization -> `cd -- pub` follows CDPATH into the decoy, which has no new
+## _site to stage, so csr-build publishes NOTHING and leaves the real repo untouched.
+noabs="$(mktemp)"
+sed '/CANARY-ABSPATH-START/,/CANARY-ABSPATH-END/d' "${csr_build}" > "${noabs}"
+chmod +x -- "${noabs}"
+if cmp --silent -- "${csr_build}" "${noabs}"; then
+   printf '%s\n' "FAIL: Q: canary could not strip the absolutization (sentinels missing?)" >&2
+   fails=$((fails + 1))
+fi
+setup_rel_fixtures
+fixture_q="$(make_fixture "${noabs}")"
+run_build_rel "${fixture_q}"
+rel_real_head="$(git -C "${rel_real_base}/pub" rev-parse HEAD)"
+if contains "${build_out}" "${pushed_msg}"; then
+   printf '%s\n' "FAIL: Q: canary -- pre-fix code must NOT publish the real repo under CDPATH, got: ${build_out}" >&2
+   fails=$((fails + 1))
+fi
+if [ "${rel_real_head}" != "${rel_real_init}" ]; then
+   printf '%s\n' "FAIL: Q: canary -- the real repo changed despite the CDPATH divert" >&2
+   fails=$((fails + 1))
+fi
+safe-rm --recursive --force -- "${fixture_q}" "${rel_real_base}" "${rel_decoy_base}"
+safe-rm --force -- "${noabs}"
+safe-rm --recursive --force -- "${clean_fakebin}"
+
 safe-rm --recursive --force -- "${fakebin}" "${stub_root}" "${tmp_home}"
 
 if [ "${fails}" -eq 0 ]; then

@@ -109,6 +109,14 @@ if [ ! -d "${artifacts_dir}" ] || [ ! -d "${artifacts_dir}/.git" ]; then
    printf '%s\n' "csr-build: artifacts repo not found at ${artifacts_dir} (set CSR_ARTIFACTS)" >&2
    exit 1
 fi
+## Absolutize the artifacts path ONCE, up front: the build rsyncs into it, then `cd`s into it and
+## runs git by cwd. A relative CSR_ARTIFACTS would make that `cd` honor CDPATH and land in a
+## DIFFERENT directory than rsync wrote to (rsync ignores CDPATH) -- silently committing, pushing,
+## and confirming the WRONG tree. An absolute path makes `cd` ignore CDPATH, keeping rsync, the cd,
+## and every git op on one repo. (CDPATH unset here so this resolution itself is not diverted.)
+## CANARY-ABSPATH-START
+artifacts_dir="$(unset CDPATH; cd -- "${artifacts_dir}" && pwd -P)"
+## CANARY-ABSPATH-END
 if [ ! -x "${check_site}" ]; then
    printf '%s\n' "csr-build: dist-ai check_site not found at ${check_site} (set CSR_DIST_AI)" >&2
    exit 1
@@ -196,9 +204,13 @@ cd -- "${artifacts_dir}"
 ## The artifacts repo is direct-to-master (the push below is `git push <remote> master`, and the
 ## confirm keys on HEAD). Refuse on any other branch: a commit to a non-master HEAD would never be
 ## the pushed `master` tip, so the confirm would wait out its whole timeout on an unpushed sha.
-artifacts_branch="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
-if [ "${artifacts_branch}" != 'master' ]; then
-   printf '%s\n' "csr-build: artifacts repo is on '${artifacts_branch}', not master -- refusing to publish" >&2
+## Compare the FULL ref, not `--short`: when `master` is ambiguous (e.g. a tag named `master`
+## exists) `symbolic-ref --short` disambiguates to `heads/master`, which would falsely fail the
+## check on a genuine master checkout. `symbolic-ref HEAD` is unambiguous; a detached HEAD exits
+## non-zero -> empty -> refused.
+artifacts_head_ref="$(git symbolic-ref HEAD 2>/dev/null || true)"
+if [ "${artifacts_head_ref}" != 'refs/heads/master' ]; then
+   printf '%s\n' "csr-build: artifacts repo HEAD is '${artifacts_head_ref}', not refs/heads/master -- refusing to publish" >&2
    exit 1
 fi
 
